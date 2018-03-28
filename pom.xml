@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>PandasDevops</groupId>
-  <artifactId>Pandas</artifactId>
+  <artifactId>JPandas</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>Pandas</name>
-  <url>http://maven.apache.org</url>
+  <name>JPandas</name>
+  <url>https://github.com/Jaks-Hat/Devops_Project</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
