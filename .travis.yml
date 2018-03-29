@@ -1,1 +1,10 @@
 language : java
+
+jdk :
+  -oraclejdk8
+
+notifications:
+  slack:
+    on_success: never
+  slack:
+    on_failure: never
