@@ -59,11 +59,13 @@ public class Dataframes {
         System.out.println("Sécurités sur les index, index unique");
 
         Dataframes data = new Dataframes();
-        ArrayList<Colonne> tmp = new ArrayList<>();
+        ArrayList tmp = new ArrayList<>();
+
         for (int i = 0; i < dataframes.size(); i++) {
             ArrayList tmpcol = new ArrayList<>();
+            tmpcol.add(dataframes.get(i).getTab().get(0));
             for (Integer index1 : index) {
-                tmpcol.add(dataframes.get(i).getTab().get(index1));
+                tmpcol.add(dataframes.get(i).getTab().get(index1 + 1));
             }
             tmp.add(new Colonne(tmpcol));
         }
@@ -81,15 +83,12 @@ public class Dataframes {
             int i = 0;
             while ((i < dataframes.size()) && (!dataframes.get(i).getTab().get(0).equals(label1))) {
                 i++;
-                System.out.println("test:" + dataframes.get(i).getTab().get(0) +"=" + label1 + " b:" + dataframes.get(i).getTab().get(0).equals(label1));
-
             }
-            /*if ((i < dataframes.size()) && dataframes.get(i).getTab().get(0).equals(label1)) {
-                System.out.println("test:" + dataframes.get(i).getTab().get(0) + "=" + label1 +" b:" + dataframes.get(i).getTab().get(0).equals(label1));
-                tmp.add(dataframes.get(i).getTab().clone());
-            }*/
+            if (i < dataframes.size()) {
+                tmp.add(new Colonne((ArrayList<String>) dataframes.get(i).getTab().clone()));
+            }
         }
-        //data.setDataframes(tmp);
+        data.setDataframes(tmp);
         return data;
     }
 
@@ -270,6 +269,26 @@ public class Dataframes {
 
     //Regrouper les données -> d //demander au prof
     public Dataframes groupbyAggreate(String... label) {
+        int i =0;
+        int j =0;
+        boolean b = true;
+        while(i < label.length && b){
+            j = 0;
+            while(j < dataframes.size() && !dataframes.get(j).getTab().isEmpty() 
+                    && !(label[i].equals(dataframes.get(j).getTab().get(0)))){
+                j++;
+            }
+            if(j == dataframes.size()+1){
+                b=false;
+            }
+            i++;
+        }
+        if(i == label.length+1){
+            
+        }else{
+            System.out.println("Erreur de group by");
+        }
+       
         return null;
     }
 }
