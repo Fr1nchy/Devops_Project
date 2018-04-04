@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+package testPandas;
+
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
