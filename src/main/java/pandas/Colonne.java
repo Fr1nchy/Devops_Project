@@ -53,4 +53,5 @@ public class Colonne {
     public void setTab(ArrayList tab) {
         this.tab = tab;
     }
+    
 }

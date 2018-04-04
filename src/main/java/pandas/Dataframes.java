@@ -269,26 +269,102 @@ public class Dataframes {
 
     //Regrouper les données -> d //demander au prof
     public Dataframes groupbyAggreate(String... label) {
-        int i =0;
-        int j =0;
-        boolean b = true;
-        while(i < label.length && b){
-            j = 0;
-            while(j < dataframes.size() && !dataframes.get(j).getTab().isEmpty() 
-                    && !(label[i].equals(dataframes.get(j).getTab().get(0)))){
-                j++;
+        Dataframes data = new Dataframes();
+        if (!dataframes.isEmpty()) {
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            boolean b = true;
+            while (i < label.length && (b)) {
+                j = 0;
+                while (j < dataframes.size() && !dataframes.get(j).getTab().isEmpty()
+                        && !(label[i].equals(dataframes.get(j).getTab().get(0)))) {
+                    j++;
+                }
+                if (label[i].equals(dataframes.get(j).getTab().get(0))) {
+                    b = true;
+                } else {
+                    b = false;
+                }
+                i++;
             }
-            if(j == dataframes.size()+1){
-                b=false;
+
+            if ((i == label.length) && (b)) {
+
+                ArrayList<ArrayList<ArrayList>> tmpdata = new ArrayList();
+                ArrayList<ArrayList> eq = new ArrayList();
+                ArrayList<ArrayList> tmp = null;
+                for (i = 0; i < dataframes.size(); i++) {
+                    for (j = 0; j < label.length; j++) {
+                        tmp = new ArrayList();
+                        for (k = 0; k < dataframes.get(i).getTab().size(); k++) {
+                            if (dataframes.get(i).getTab().get(0).equals(label[j])) {
+                                if (eq.size() == k) {
+                                    eq.add(new ArrayList());
+                                    eq.get(k).add(dataframes.get(i).getTab().get(k));
+                                } else {
+                                    eq.get(k).add(dataframes.get(i).getTab().get(k));
+                                }
+                            } else {
+                                ArrayList tmp1 = new ArrayList();
+                                tmp1.add(dataframes.get(i).getTab().get(k));
+                                tmp.add(tmp1);
+                            }
+                        }
+                    }
+                    if (!tmp.isEmpty()) {
+                        tmpdata.add(tmp);
+                    }
+                }
+
+                for (i = 0; i < tmpdata.size(); i++) {
+                    for (j = 0; j < label.length; j++) {
+                        if (tmpdata.get(i).get(0).get(0).equals(label[j])) {
+                            tmpdata.remove(i);
+                        }
+                    }
+                }
+                System.out.println("tmpdata deb:" + tmpdata);
+
+                //Algo distinc deux boucle
+                for (i = 0; i < eq.size(); i++) {
+                    for (j = 0; j < eq.size(); j++) {
+                        if ((i != j) && (tabEquals(eq.get(i), eq.get(j)))) {
+                            //regrouper
+                            for (k = 0; k < tmpdata.size(); k++) {
+                                for (int l = 0; l < tmpdata.get(k).get(0).size(); l++) {
+                                    tmpdata.get(k).get(i).add(tmpdata.get(k).get(j).get(l));
+                                }
+                                tmpdata.get(k).remove(j);
+                            }
+                            eq.remove(j);
+                        }
+                    }
+                }
+                tmpdata.add(eq);
+                System.out.println("tmpdata fin:" + tmpdata);
+
+            } else {
+                System.out.println("Erreur de group by");
             }
-            i++;
+        } else {
+            System.out.println("Dataframe vide");
         }
-        if(i == label.length+1){
-            
-        }else{
-            System.out.println("Erreur de group by");
+
+        return data;
+    }
+
+    private boolean tabEquals(ArrayList a, ArrayList b) {
+        if (a.size() == b.size()) {
+            int i = 0;
+
+            while (i < a.size() && a.get(i).equals(b.get(i))) {
+                i++;
+            }
+            if (i == a.size()) {
+                return true;
+            }
         }
-       
-        return null;
+        return false;
     }
 }
