@@ -5,14 +5,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Dataframes {
+public class Dataframe {
 
     private ArrayList<Colonne> dataframes;
 
     //Creation d'une dataFrame avec un CSV
-    public Dataframes(String nomFichier) {
+    public Dataframe(String nomFichier) {
         System.out.println("Ajouter des sécurités sur les noms, Id unique et sur la taille");
-        dataframes = new ArrayList();
+        dataframes = new ArrayList<>();
         String line = "";
         try (BufferedReader br = new BufferedReader(new FileReader(nomFichier))) {
             while ((line = br.readLine()) != null) {
@@ -20,13 +20,14 @@ public class Dataframes {
 
                 if (dataframes.isEmpty()) {
                     for (int i = 0; i < tab.length; i++) {
-                        ArrayList tmp = new ArrayList();
-                        tmp.add(tab[i].replaceAll("\"", ""));
-                        dataframes.add(new Colonne(tmp));
+                        ArrayList<ArrayList<String>> tmp = new ArrayList<>();
+                        dataframes.add(new Colonne(tmp, tab[i].replaceAll("\"", "")));
                     }
                 } else {
                     for (int i = 0; i < tab.length; i++) {
-                        dataframes.get(i).getTab().add(tab[i].replaceAll("\"", ""));
+                        ArrayList<String> tmpint = new ArrayList<>();
+                        tmpint.add(tab[i].replaceAll("\"", ""));
+                        dataframes.get(i).getTab().add(tmpint);
                     }
                 }
             }
@@ -35,66 +36,76 @@ public class Dataframes {
     }
 
     //Creation d'une dataFrame avec une collection
-    public Dataframes(ArrayList... values) {
-        dataframes = new ArrayList();
-        if ((values.length > 0) && (!values[0].isEmpty())) {
+    public Dataframe(ArrayList<ArrayList<String>>... values) {
+        dataframes = new ArrayList<>();
+        /*    if ((values.length > 0) && (!values[0].isEmpty())) {
             int i = 0;
             boolean b = true;
             int taille = values[0].size();
             String nom = "";
 
             while (b && i < values.length) {
-                dataframes.add(new Colonne(values[i]));
+                //dataframes.add(new Colonne(values[i]));
                 b = b & (taille == values[i].size()) & (!nom.equals(values[i].get(0)));
                 i++;
             }
             if (!b) {
                 System.out.println("Erreur de taille ");
             }
-        }
+        }*/
     }
 
     //Creation d'une dataFrame avec un sous-ensemble de lignes à partir de leur index
-    public Dataframes selectDataLigne(Integer... index) {
+    public Dataframe selectDataLigne(Integer... index) {
         System.out.println("Sécurités sur les index, index unique");
 
-        Dataframes data = new Dataframes();
-        ArrayList tmp = new ArrayList<>();
+        Dataframe data = new Dataframe();
+        ArrayList<Colonne> tmp = new ArrayList<>();
 
         for (int i = 0; i < dataframes.size(); i++) {
-            ArrayList tmpcol = new ArrayList<>();
-            tmpcol.add(dataframes.get(i).getTab().get(0));
+            ArrayList<ArrayList<String>> tmpcol = new ArrayList<>();
+
             for (Integer index1 : index) {
-                tmpcol.add(dataframes.get(i).getTab().get(index1 + 1));
+                ArrayList<String> tmpligne = new ArrayList<>();
+                tmpligne.add(dataframes.get(i).getTab().get(index1).toString());
+                tmpcol.add(tmpligne);
             }
-            tmp.add(new Colonne(tmpcol));
+            tmp.add(new Colonne(tmpcol, dataframes.get(i).getLabel()));
         }
         data.setDataframes(tmp);
         return data;
     }
 
     //Creation d'une dataFrame avec un sous-ensemble de colonnes en utilisant les labels
-    public Dataframes selectDataColonne(String... label) {
+    public Dataframe selectDataColonne(String... label) {
         System.out.println("Sécurités sur les label, index label");
-        Dataframes data = new Dataframes();
-        ArrayList tmp = new ArrayList<>();
+        Dataframe data = new Dataframe();
+        ArrayList<Colonne> tmp = new ArrayList<>();
 
         for (String label1 : label) {
             int i = 0;
-            while ((i < dataframes.size()) && (!dataframes.get(i).getTab().get(0).equals(label1))) {
+            while ((i < dataframes.size()) && (!dataframes.get(i).getLabel().equals(label1))) {
                 i++;
             }
             if (i < dataframes.size()) {
-                tmp.add(new Colonne((ArrayList<String>) dataframes.get(i).getTab().clone()));
+                tmp.add(new Colonne((ArrayList<ArrayList<String>>) dataframes.get(i).getTab().clone(), dataframes.get(i).getLabel()));
             }
         }
         data.setDataframes(tmp);
         return data;
     }
 
+    private void showLabel() {
+        for (int i = 0; i < dataframes.size(); i++) {
+            System.out.print(dataframes.get(i).getLabel() + " ");
+        }
+        System.out.print("\n");
+    }
+
     public void afficherDataframe() {
         System.out.println("Dataframe:");
         if (!dataframes.isEmpty()) {
+            showLabel();
             for (int i = 0; i < dataframes.get(0).getTab().size(); i++) {
                 for (int j = 0; j < dataframes.size(); j++) {
                     System.out.print(dataframes.get(j).getTab().get(i) + " ");
@@ -106,11 +117,13 @@ public class Dataframes {
     }
 
     public void afficherPremieresLignes() {
-        System.out.println("Dataframe:");
+        System.out.println("Dataframe premiere ligne:");
+
         if (!dataframes.isEmpty()) {
+            showLabel();
             int taille = 0;
-            if (dataframes.get(0).getTab().size() > 2) {
-                taille = 3;
+            if (dataframes.get(0).getTab().size() > 1) {
+                taille = 2;
             } else {
                 taille = dataframes.size();
             }
@@ -124,14 +137,9 @@ public class Dataframes {
     }
 
     public void afficherDernieresLignes() {
-        System.out.println("Dataframe:");
+        System.out.println("Dataframe derniere ligne:");
         if (!dataframes.isEmpty()) {
-
-            for (int i = 0; i < dataframes.size(); i++) {
-                System.out.print(dataframes.get(i).getTab().get(0) + " ");
-            }
-            System.out.print("\n");
-
+            showLabel();
             for (int i = dataframes.get(0).getTab().size() - 1; i < dataframes.get(0).getTab().size(); i++) {
                 for (int j = 0; j < dataframes.size(); j++) {
                     System.out.print(dataframes.get(j).getTab().get(i) + " ");
@@ -141,121 +149,52 @@ public class Dataframes {
         }
     }
 
-    //Statistiques de base sur les colonnes -> sbc
-    public void mean(String label) {
+    private int indexLabel(String label) {
         int i = 0;
-        while ((i < dataframes.size()) && (!dataframes.get(i).getTab().get(0).equals(label))) {
+        while ((i < dataframes.size()) && (!dataframes.get(i).getLabel().equals(label))) {
             i++;
         }
-        if (i < dataframes.size()) {
-            if (dataframes.get(i).getTab().get(0).equals(label) && dataframes.get(i).getType() < 3 && dataframes.get(i).getType() > 0) {
-                double resultat = 0;
-                for (int j = 1; j < dataframes.get(i).getTab().size(); j++) {
-                    System.out.println("j[" + j + "]:: " + dataframes.get(i).getTab().get(j));
-                    resultat += Double.parseDouble(dataframes.get(i).getTab().get(j).toString());
-                }
-                resultat = (resultat / (dataframes.get(i).getTab().size() - 1));
-                System.out.println("Mean: " + resultat);
-            } else {
-                System.out.println("Impossible Mean !!");
-            }
+        if (i < dataframes.size() && dataframes.get(i).getType() < 3 && dataframes.get(i).getType() > 0) {
+            return i;
         } else {
-            System.out.println("Pas trouvé le label");
+            return -1;
         }
+    }
 
+    //Statistiques de base sur les colonnes -> sbc
+    public void mean(String label) {
+        int i = indexLabel(label);
+        if (i != -1) {
+            dataframes.get(i).mean();
+        } else {
+            System.out.println("Impossible Mean !!");
+        }
     }
 
     public void sum(String label) {
-        int i = 0;
-        while ((i < dataframes.size()) && (!dataframes.get(i).getTab().get(0).equals(label))) {
-            i++;
-        }
-        if (i < dataframes.size()) {
-            if (dataframes.get(i).getTab().get(0).equals(label) && dataframes.get(i).getType() < 3 && dataframes.get(i).getType() > 0) {
-                double resultat = 0;
-                for (int j = 1; j < dataframes.get(i).getTab().size(); j++) {
-                    resultat += Double.parseDouble(dataframes.get(i).getTab().get(j).toString());
-                }
-                System.out.println("Sum: " + resultat);
-            } else {
-                System.out.println("Impossible Sum !!");
-            }
+        int i = indexLabel(label);
+        if (i != -1) {
+            dataframes.get(i).sum();
         } else {
-            System.out.println("Pas trouvé le label");
+            System.out.println("Impossible Sum !!");
         }
     }
 
     public void min(String label) {
-        int i = 0;
-        while ((i < dataframes.size()) && (!dataframes.get(i).getTab().get(0).equals(label))) {
-            i++;
-        }
-        if (i < dataframes.size()) {
-            if (dataframes.get(i).getTab().get(0).equals(label) && dataframes.get(i).getType() < 3 && dataframes.get(i).getType() > 0) {
-                double resultat = Double.MAX_VALUE;
-                double tmp = 0;
-                for (int j = 1; j < dataframes.get(i).getTab().size(); j++) {
-                    tmp = Double.parseDouble(dataframes.get(i).getTab().get(j).toString());
-                    if (tmp < resultat) {
-                        resultat = tmp;
-                    }
-                }
-                System.out.println("Min: " + resultat);
-            } else {
-                System.out.println("Impossible Min !!");
-            }
+        int i = indexLabel(label);
+        if (i != -1) {
+            dataframes.get(i).min();
         } else {
-            System.out.println("Pas trouvé le label");
+            System.out.println("Impossible min !!");
         }
     }
 
     public void max(String label) {
-        int i = 0;
-        while ((i < dataframes.size()) && (!dataframes.get(i).getTab().get(0).equals(label))) {
-            i++;
-        }
-        if (i < dataframes.size()) {
-            if (dataframes.get(i).getTab().get(0).equals(label) && dataframes.get(i).getType() < 3 && dataframes.get(i).getType() > 0) {
-                double resultat = 0;
-                double tmp = 0;
-                for (int j = 1; j < dataframes.get(i).getTab().size(); j++) {
-                    tmp = Double.parseDouble(dataframes.get(i).getTab().get(j).toString());
-                    if (tmp > resultat) {
-                        resultat = tmp;
-                    }
-                }
-                System.out.println("Max: " + resultat);
-            } else {
-                System.out.println("Impossible Max !!");
-            }
+        int i = indexLabel(label);
+        if (i != -1) {
+            dataframes.get(i).max();
         } else {
-            System.out.println("Pas trouvé le label");
-        }
-    }
-
-    public void cumsum(String label) {
-        double resultat = 0;
-        for (int i = 0; i < dataframes.size(); i++) {
-            if (dataframes.get(i).getTab().get(0).equals(label) && dataframes.get(i).getType() < 3 && dataframes.get(i).getType() > 0) {
-                System.out.println("CumSum: ");
-                for (int j = 1; j < dataframes.get(i).getTab().size(); j++) {
-                    resultat += Double.parseDouble(dataframes.get(i).getTab().get(j).toString());
-                    System.out.println(resultat + " ");
-                }
-            }
-        }
-    }
-
-    public void cumprod(String label) {
-        double resultat = 1;
-        for (int i = 0; i < dataframes.size(); i++) {
-            if (dataframes.get(i).getTab().get(0).equals(label) && dataframes.get(i).getType() < 3 && dataframes.get(i).getType() > 0) {
-                System.out.println("CumProd: ");
-                for (int j = 1; j < dataframes.get(i).getTab().size(); j++) {
-                    resultat *= Double.parseDouble(dataframes.get(i).getTab().get(j).toString());
-                    System.out.println(resultat + " ");
-                }
-            }
+            System.out.println("Impossible Max !!");
         }
     }
 
@@ -268,8 +207,9 @@ public class Dataframes {
     }
 
     //Regrouper les données -> d //demander au prof
-    public Dataframes groupbyAggreate(String... label) {
-        Dataframes data = new Dataframes();
+    public Dataframe groupbyAggreate(Integer op, String... label) {
+        Dataframe data = null;
+        //Sécurité
         if (!dataframes.isEmpty()) {
             int i = 0;
             int j = 0;
@@ -278,10 +218,10 @@ public class Dataframes {
             while (i < label.length && (b)) {
                 j = 0;
                 while (j < dataframes.size() && !dataframes.get(j).getTab().isEmpty()
-                        && !(label[i].equals(dataframes.get(j).getTab().get(0)))) {
+                        && !(label[i].equals(dataframes.get(j).getLabel()))) {
                     j++;
                 }
-                if (label[i].equals(dataframes.get(j).getTab().get(0))) {
+                if (label[i].equals(dataframes.get(j).getLabel())) {
                     b = true;
                 } else {
                     b = false;
@@ -290,10 +230,18 @@ public class Dataframes {
             }
 
             if ((i == label.length) && (b)) {
+                ArrayList<Colonne> tmpdata = new ArrayList<>();
+                
+                for (i = 0; i < dataframes.size(); i++) {
+                    for (j = 0; j < label.length; j++) {
+                        for (k = 0; k < dataframes.get(i).getTab().size(); k++) {
 
-                ArrayList<ArrayList<ArrayList>> tmpdata = new ArrayList();
-                ArrayList<ArrayList> eq = new ArrayList();
-                ArrayList<ArrayList> tmp = null;
+                        }
+                    }
+                }
+                /*ArrayList<ArrayList<ArrayList<String>>> tmpdata = new ArrayList();
+                ArrayList<ArrayList<String>> eq = new ArrayList();
+                ArrayList<ArrayList<String>> tmp = null;
                 for (i = 0; i < dataframes.size(); i++) {
                     for (j = 0; j < label.length; j++) {
                         tmp = new ArrayList();
@@ -301,9 +249,9 @@ public class Dataframes {
                             if (dataframes.get(i).getTab().get(0).equals(label[j])) {
                                 if (eq.size() == k) {
                                     eq.add(new ArrayList());
-                                    eq.get(k).add(dataframes.get(i).getTab().get(k));
+                                    eq.get(k).add(dataframes.get(i).getTab().get(k).toString());
                                 } else {
-                                    eq.get(k).add(dataframes.get(i).getTab().get(k));
+                                    eq.get(k).add(dataframes.get(i).getTab().get(k).toString());
                                 }
                             } else {
                                 ArrayList tmp1 = new ArrayList();
@@ -343,18 +291,17 @@ public class Dataframes {
                 }
                 tmpdata.add(eq);
                 System.out.println("tmpdata fin:" + tmpdata);
-
+                 */
             } else {
                 System.out.println("Erreur de group by");
             }
         } else {
             System.out.println("Dataframe vide");
         }
-
         return data;
     }
 
-    private boolean tabEquals(ArrayList a, ArrayList b) {
+    private boolean tabEquals(ArrayList<String> a, ArrayList<String> b) {
         if (a.size() == b.size()) {
             int i = 0;
 
@@ -366,5 +313,71 @@ public class Dataframes {
             }
         }
         return false;
+    }
+
+    private Dataframe gpbySUM(ArrayList<ArrayList<ArrayList<String>>> d) {
+        Dataframe data = new Dataframe();
+        ArrayList<Colonne> tab = new ArrayList<Colonne>();
+
+        for (int i = 0; i < d.size(); i++) {
+            ArrayList<String> tmp = new ArrayList<String>();
+            for (int j = 0; j < d.get(i).size(); j++) {
+                double resultat = 0;
+                for (int k = 0; k < d.get(i).get(j).size(); k++) {
+                    System.out.println("k" + k + ":" + d.get(i).get(j).get(k));
+                    //resultat += Double.parseDouble(d.get(i).get(j).get(k).toString());
+                }
+                tmp.add(resultat + "");
+            }
+            //tab.add(new Colonne(tmp));
+        }
+        data.setDataframes(tab);
+        return data;
+    }
+
+    private Dataframe gpbyMIN(ArrayList<ArrayList<ArrayList<String>>> d) {
+        Dataframe data = new Dataframe();
+        ArrayList<Colonne> tab = new ArrayList<Colonne>();
+
+        for (int i = 0; i < d.size(); i++) {
+            ArrayList<String> tmp = new ArrayList<String>();
+            for (int j = 0; j < d.get(i).size(); j++) {
+                double resultat = Double.MAX_VALUE;
+                double tmp1 = 0;
+                for (int k = 0; k < d.get(i).get(j).size(); k++) {
+                    tmp1 = Double.parseDouble(d.get(i).get(j).get(k).toString());
+                    if (tmp1 < resultat) {
+                        resultat = tmp1;
+                    }
+                }
+                tmp.add(resultat + "");
+            }
+            //tab.add(new Colonne(tmp));
+        }
+        data.setDataframes(tab);
+        return data;
+    }
+
+    private Dataframe gpbyMAX(ArrayList<ArrayList<ArrayList<String>>> d) {
+        Dataframe data = new Dataframe();
+        ArrayList<Colonne> tab = new ArrayList<Colonne>();
+
+        for (int i = 0; i < d.size(); i++) {
+            ArrayList<String> tmp = new ArrayList<String>();
+            for (int j = 0; j < d.get(i).size(); j++) {
+                double resultat = 0;
+                double tmp1 = 0;
+                for (int k = 0; k < d.get(i).get(j).size(); k++) {
+                    tmp1 = Double.parseDouble(d.get(i).get(j).get(k).toString());
+                    if (tmp1 > resultat) {
+                        resultat = tmp1;
+                    }
+                }
+                tmp.add(resultat + "");
+            }
+            //tab.add(new Colonne(tmp));
+        }
+        data.setDataframes(tab);
+        return data;
     }
 }
