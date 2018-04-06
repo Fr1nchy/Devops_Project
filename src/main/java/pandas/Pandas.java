@@ -16,10 +16,10 @@ public class Pandas {
         d = new Dataframe("doublon.csv");
         d.afficherDataframe();
 
-        d.mean("Age");
-        d.max("Age");
-        d.min("Age");
-        d.sum("Age");
+        d.meanCol("Age");
+        d.maxCol("Age");
+        d.minCol("Age");
+        d.sumCol("Age");
         System.out.println("");
         d.afficherDernieresLignes();
         System.out.println("");
@@ -32,9 +32,12 @@ public class Pandas {
         d1.afficherDataframe();
         System.out.println("");
         
-        Dataframe d3 = d.groupbyAggreate("First Name");
+        Dataframe d3 = d.groupby("First Name");
         d3.afficherDataframe();
-
+        
+        Dataframe d4 = d3.groupbyOperation("Age", d.SUM);
+        d4.afficherDataframe();
+        
         /*
         //d1.afficherDataframe();
         //d.afficherDernieresLignes();

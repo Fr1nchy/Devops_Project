@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class Dataframe {
 
     private ArrayList<Colonne> dataframes;
+    public final int SUM = 0;
+    public final int MIN = 1;
+    public final int MAX = 2;
+    public final int MEAN = 3;
 
     //Creation d'une dataFrame avec un CSV
     public Dataframe(String nomFichier) {
@@ -162,7 +166,7 @@ public class Dataframe {
     }
 
     //Statistiques de base sur les colonnes -> sbc
-    public void mean(String label) {
+    public void meanCol(String label) {
         int i = indexLabel(label);
         if (i != -1) {
             dataframes.get(i).mean();
@@ -171,7 +175,7 @@ public class Dataframe {
         }
     }
 
-    public void sum(String label) {
+    public void sumCol(String label) {
         int i = indexLabel(label);
         if (i != -1) {
             dataframes.get(i).sum();
@@ -180,7 +184,7 @@ public class Dataframe {
         }
     }
 
-    public void min(String label) {
+    public void minCol(String label) {
         int i = indexLabel(label);
         if (i != -1) {
             dataframes.get(i).min();
@@ -189,7 +193,7 @@ public class Dataframe {
         }
     }
 
-    public void max(String label) {
+    public void maxCol(String label) {
         int i = indexLabel(label);
         if (i != -1) {
             dataframes.get(i).max();
@@ -218,7 +222,7 @@ public class Dataframe {
     }
 
     //Regrouper les données -> d //demander au prof
-    public Dataframe groupbyAggreate(String... label) {
+    public Dataframe groupby(String... label) {
         Dataframe data = this.clone();
         //Sécurité
         if (!dataframes.isEmpty()) {
@@ -263,7 +267,9 @@ public class Dataframe {
                         if ((i != j) && (tabEquals(eq.get(i), eq.get(j)))) {
                             for (k = 0; k < data.getDataframes().size(); k++) {
                                 for (int l = 0; l < data.getDataframes().get(k).getTab().get(j).size(); l++) {
-                                    data.getDataframes().get(k).getTab().get(i).add(data.getDataframes().get(k).getTab().get(j).get(l));
+                                    data.getDataframes().get(k).getTab().get(i).add(
+                                            data.getDataframes().get(k).getTab().get(j).get(l)
+                                    );
                                 }
                                 data.getDataframes().get(k).getTab().remove(j);
                             }
@@ -293,4 +299,40 @@ public class Dataframe {
         }
         return false;
     }
+
+    public Dataframe groupbyOperation(String label, int op) {
+        Dataframe d = this.clone();
+        int i = indexLabel(label);
+        if (i != -1) {
+            double res = 0;
+            for (int j = 0; j < d.getDataframes().get(i).getTab().size(); j++) {
+
+                switch (op) {
+                    case SUM:
+                        res = CalculatorArray.sum(d.getDataframes().get(i).getTab().get(j));
+                        break;
+                    case MIN:
+                        res = CalculatorArray.min(d.getDataframes().get(i).getTab().get(j));
+                        break;
+                    case MAX:
+                        res = CalculatorArray.max(d.getDataframes().get(i).getTab().get(j));
+                        break;
+                    case MEAN:
+                        res = CalculatorArray.mean(d.getDataframes().get(i).getTab().get(j));
+                        break;
+                    default:
+                        System.out.println("Erreur Opération !!");
+                }
+
+                d.getDataframes().get(i).getTab().remove(j);
+                ArrayList<String> tmp = new ArrayList<>();
+                tmp.add(res + "");
+                d.getDataframes().get(i).getTab().add(j, tmp);
+            }
+        } else {
+            System.out.println("Impossible Opération !!");
+        }
+        return d;
+    }
+
 }
