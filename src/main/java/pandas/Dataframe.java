@@ -267,9 +267,15 @@ public class Dataframe {
                         if ((i != j) && (tabEquals(eq.get(i), eq.get(j)))) {
                             for (k = 0; k < data.getDataframes().size(); k++) {
                                 for (int l = 0; l < data.getDataframes().get(k).getTab().get(j).size(); l++) {
-                                    data.getDataframes().get(k).getTab().get(i).add(
-                                            data.getDataframes().get(k).getTab().get(j).get(l)
-                                    );
+                                    int m = 0;
+                                    while (m < label.length && !data.getDataframes().get(k).getLabel().equals(label[m])) {
+                                        m++;
+                                    }
+                                    if (m == label.length) {
+                                        data.getDataframes().get(k).getTab().get(i).add(
+                                                data.getDataframes().get(k).getTab().get(j).get(l)
+                                        );
+                                    }
                                 }
                                 data.getDataframes().get(k).getTab().remove(j);
                             }
