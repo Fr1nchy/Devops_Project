@@ -206,9 +206,20 @@ public class Dataframe {
         return dataframes;
     }
 
+    public Dataframe clone() {
+        Dataframe data = new Dataframe();
+        ArrayList<Colonne> tmp = new ArrayList<>();
+
+        for (int i = 0; i < dataframes.size(); i++) {
+            tmp.add(new Colonne((ArrayList<ArrayList<String>>) dataframes.get(i).getTab().clone(), dataframes.get(i).getLabel()));
+        }
+        data.setDataframes(tmp);
+        return data;
+    }
+
     //Regrouper les données -> d //demander au prof
-    public Dataframe groupbyAggreate(Integer op, String... label) {
-        Dataframe data = null;
+    public Dataframe groupbyAggreate(String... label) {
+        Dataframe data = this.clone();
         //Sécurité
         if (!dataframes.isEmpty()) {
             int i = 0;
@@ -230,68 +241,36 @@ public class Dataframe {
             }
 
             if ((i == label.length) && (b)) {
-                ArrayList<Colonne> tmpdata = new ArrayList<>();
-                
-                for (i = 0; i < dataframes.size(); i++) {
-                    for (j = 0; j < label.length; j++) {
-                        for (k = 0; k < dataframes.get(i).getTab().size(); k++) {
 
-                        }
-                    }
-                }
-                /*ArrayList<ArrayList<ArrayList<String>>> tmpdata = new ArrayList();
                 ArrayList<ArrayList<String>> eq = new ArrayList();
-                ArrayList<ArrayList<String>> tmp = null;
                 for (i = 0; i < dataframes.size(); i++) {
                     for (j = 0; j < label.length; j++) {
-                        tmp = new ArrayList();
                         for (k = 0; k < dataframes.get(i).getTab().size(); k++) {
-                            if (dataframes.get(i).getTab().get(0).equals(label[j])) {
+                            if (dataframes.get(i).getLabel().equals(label[j])) {
                                 if (eq.size() == k) {
                                     eq.add(new ArrayList());
-                                    eq.get(k).add(dataframes.get(i).getTab().get(k).toString());
-                                } else {
-                                    eq.get(k).add(dataframes.get(i).getTab().get(k).toString());
                                 }
-                            } else {
-                                ArrayList tmp1 = new ArrayList();
-                                tmp1.add(dataframes.get(i).getTab().get(k));
-                                tmp.add(tmp1);
+                                eq.get(k).add(dataframes.get(i).getTab().get(k).get(0));
                             }
                         }
                     }
-                    if (!tmp.isEmpty()) {
-                        tmpdata.add(tmp);
-                    }
                 }
-
-                for (i = 0; i < tmpdata.size(); i++) {
-                    for (j = 0; j < label.length; j++) {
-                        if (tmpdata.get(i).get(0).get(0).equals(label[j])) {
-                            tmpdata.remove(i);
-                        }
-                    }
-                }
-                System.out.println("tmpdata deb:" + tmpdata);
+                System.out.println("eq:" + eq);
 
                 //Algo distinc deux boucle
                 for (i = 0; i < eq.size(); i++) {
                     for (j = 0; j < eq.size(); j++) {
                         if ((i != j) && (tabEquals(eq.get(i), eq.get(j)))) {
-                            //regrouper
-                            for (k = 0; k < tmpdata.size(); k++) {
-                                for (int l = 0; l < tmpdata.get(k).get(0).size(); l++) {
-                                    tmpdata.get(k).get(i).add(tmpdata.get(k).get(j).get(l));
+                            for (k = 0; k < data.getDataframes().size(); k++) {
+                                for (int l = 0; l < data.getDataframes().get(k).getTab().get(j).size(); l++) {
+                                    data.getDataframes().get(k).getTab().get(i).add(data.getDataframes().get(k).getTab().get(j).get(l));
                                 }
-                                tmpdata.get(k).remove(j);
+                                data.getDataframes().get(k).getTab().remove(j);
                             }
                             eq.remove(j);
                         }
                     }
                 }
-                tmpdata.add(eq);
-                System.out.println("tmpdata fin:" + tmpdata);
-                 */
             } else {
                 System.out.println("Erreur de group by");
             }
@@ -313,71 +292,5 @@ public class Dataframe {
             }
         }
         return false;
-    }
-
-    private Dataframe gpbySUM(ArrayList<ArrayList<ArrayList<String>>> d) {
-        Dataframe data = new Dataframe();
-        ArrayList<Colonne> tab = new ArrayList<Colonne>();
-
-        for (int i = 0; i < d.size(); i++) {
-            ArrayList<String> tmp = new ArrayList<String>();
-            for (int j = 0; j < d.get(i).size(); j++) {
-                double resultat = 0;
-                for (int k = 0; k < d.get(i).get(j).size(); k++) {
-                    System.out.println("k" + k + ":" + d.get(i).get(j).get(k));
-                    //resultat += Double.parseDouble(d.get(i).get(j).get(k).toString());
-                }
-                tmp.add(resultat + "");
-            }
-            //tab.add(new Colonne(tmp));
-        }
-        data.setDataframes(tab);
-        return data;
-    }
-
-    private Dataframe gpbyMIN(ArrayList<ArrayList<ArrayList<String>>> d) {
-        Dataframe data = new Dataframe();
-        ArrayList<Colonne> tab = new ArrayList<Colonne>();
-
-        for (int i = 0; i < d.size(); i++) {
-            ArrayList<String> tmp = new ArrayList<String>();
-            for (int j = 0; j < d.get(i).size(); j++) {
-                double resultat = Double.MAX_VALUE;
-                double tmp1 = 0;
-                for (int k = 0; k < d.get(i).get(j).size(); k++) {
-                    tmp1 = Double.parseDouble(d.get(i).get(j).get(k).toString());
-                    if (tmp1 < resultat) {
-                        resultat = tmp1;
-                    }
-                }
-                tmp.add(resultat + "");
-            }
-            //tab.add(new Colonne(tmp));
-        }
-        data.setDataframes(tab);
-        return data;
-    }
-
-    private Dataframe gpbyMAX(ArrayList<ArrayList<ArrayList<String>>> d) {
-        Dataframe data = new Dataframe();
-        ArrayList<Colonne> tab = new ArrayList<Colonne>();
-
-        for (int i = 0; i < d.size(); i++) {
-            ArrayList<String> tmp = new ArrayList<String>();
-            for (int j = 0; j < d.get(i).size(); j++) {
-                double resultat = 0;
-                double tmp1 = 0;
-                for (int k = 0; k < d.get(i).get(j).size(); k++) {
-                    tmp1 = Double.parseDouble(d.get(i).get(j).get(k).toString());
-                    if (tmp1 > resultat) {
-                        resultat = tmp1;
-                    }
-                }
-                tmp.add(resultat + "");
-            }
-            //tab.add(new Colonne(tmp));
-        }
-        data.setDataframes(tab);
-        return data;
     }
 }

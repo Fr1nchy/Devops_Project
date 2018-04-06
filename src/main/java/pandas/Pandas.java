@@ -31,7 +31,9 @@ public class Pandas {
         Dataframe d1 = d.selectDataColonne("First Name", "Age");
         d1.afficherDataframe();
         System.out.println("");
-
+        
+        Dataframe d3 = d.groupbyAggreate("First Name");
+        d3.afficherDataframe();
 
         /*
         //d1.afficherDataframe();
