@@ -5,6 +5,8 @@
  */
 package pandas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author x5pid
@@ -38,15 +40,12 @@ public class Pandas {
         Dataframe d4 = d3.groupbyOperation("Age", d.SUM);
         d4.afficherDataframe();
         
-        /*
-        //d1.afficherDataframe();
-        //d.afficherDernieresLignes();
-        //d.afficherPremieresLignes();
-        /*ArrayList a = new ArrayList();
-        ArrayList a1 = new ArrayList();
-        ArrayList a2 = new ArrayList();
-        ArrayList a3 = new ArrayList();
-        ArrayList a4 = new ArrayList();
+                
+        ArrayList<String> a = new ArrayList();
+        ArrayList<String> a1 = new ArrayList();
+        ArrayList<String> a2 = new ArrayList();
+        ArrayList<String> a3 = new ArrayList();
+        ArrayList<String> a4 = new ArrayList();
         
         a.add("Int");
         a.add("0");
@@ -70,19 +69,7 @@ public class Pandas {
         
         d = new Dataframe(a,a1,a2,a3);
         d.afficherDataframe();
-        d.afficherPremieresLignes();
-        d.afficherDernieresLignes();
-        
-        d.mean("Int");
-        d.mean("Float");
-        d.mean("String");
-        d.mean("Boolean");
-        
-        d.max("Int");
-        d.max("B");
-        
-        d.min("Int");
-        d.min("B");*/
+       
     }
 
 }

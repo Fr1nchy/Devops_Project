@@ -19,7 +19,7 @@ public class Colonne {
         this.label = label;
     }
 
-    public void max() {
+    public double max() {
         double resultat = 0;
         double tmp = 0;
         if (type == 1 || type == 2) {
@@ -31,9 +31,10 @@ public class Colonne {
             }
         }
         System.out.println("Max colonne:" + resultat);
+        return resultat;
     }
 
-    public void min() {
+    public double min() {
         double resultat = Double.MAX_VALUE;
         double tmp = 0;
         if (type == 1 || type == 2) {
@@ -45,17 +46,19 @@ public class Colonne {
             }
         }
         System.out.println("Min colonne:" + resultat);
+        return resultat;
     }
 
-    public void sum() {
+    public double sum() {
         double resultat = 0;
         for (int i = 0; i < tab.size(); i++) {
             resultat += CalculatorArray.sum(tab.get(i));
         }
         System.out.println("Sum colonne:" + resultat);
+        return resultat;
     }
 
-    public void mean() {
+    public double mean() {
         double resultat = 0;
         for (int i = 0; i < tab.size(); i++) {
             for (int j = 0; j < tab.get(i).size(); j++) {
@@ -64,6 +67,7 @@ public class Colonne {
         }
         resultat = (resultat / (tab.size()+tab.get(0).size() - 1));
         System.out.println("Mean colonne:" + resultat);
+        return resultat;
     }
 
     private int typeDef(ArrayList<ArrayList<String>> col) {

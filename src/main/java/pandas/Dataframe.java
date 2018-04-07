@@ -16,6 +16,7 @@ public class Dataframe {
     //Creation d'une dataFrame avec un CSV
     public Dataframe(String nomFichier) {
         System.out.println("Ajouter des sécurités sur les noms, Id unique et sur la taille");
+        
         dataframes = new ArrayList<>();
         String line = "";
         try (BufferedReader br = new BufferedReader(new FileReader(nomFichier))) {
@@ -40,23 +41,37 @@ public class Dataframe {
     }
 
     //Creation d'une dataFrame avec une collection
-    public Dataframe(ArrayList<ArrayList<String>>... values) {
+    public Dataframe(ArrayList<String>... values) {
         dataframes = new ArrayList<>();
-        /*    if ((values.length > 0) && (!values[0].isEmpty())) {
+
+        if ((values.length > 0) && (!values[0].isEmpty())) {
             int i = 0;
             boolean b = true;
             int taille = values[0].size();
             String nom = "";
 
             while (b && i < values.length) {
-                //dataframes.add(new Colonne(values[i]));
-                b = b & (taille == values[i].size()) & (!nom.equals(values[i].get(0)));
+                if (!values[i].isEmpty()) {
+                    b = b & (taille == values[i].size()) & (!nom.equals(values[i].get(0)));
+                    if (b) {
+                        String label = values[i].get(0);
+                        values[i].remove(0);
+                        
+                        ArrayList<ArrayList<String>> tmp = new ArrayList<>();
+                        for(int j = 0 ; j < values[i].size();j++){
+                            ArrayList<String> tmp1 = new ArrayList<>();
+                            tmp1.add(values[i].get(j));
+                            tmp.add(tmp1);
+                        }
+                        dataframes.add(new Colonne(tmp, label));
+                    }
+                }
                 i++;
             }
             if (!b) {
                 System.out.println("Erreur de taille ");
             }
-        }*/
+        }
     }
 
     //Creation d'une dataFrame avec un sous-ensemble de lignes à partir de leur index
@@ -166,39 +181,43 @@ public class Dataframe {
     }
 
     //Statistiques de base sur les colonnes -> sbc
-    public void meanCol(String label) {
+    public double meanCol(String label) {
         int i = indexLabel(label);
         if (i != -1) {
-            dataframes.get(i).mean();
+            return dataframes.get(i).mean();
         } else {
             System.out.println("Impossible Mean !!");
+            return 0;
         }
     }
 
-    public void sumCol(String label) {
+    public double sumCol(String label) {
         int i = indexLabel(label);
         if (i != -1) {
-            dataframes.get(i).sum();
+           return dataframes.get(i).sum();
         } else {
             System.out.println("Impossible Sum !!");
+            return 0;
         }
     }
 
-    public void minCol(String label) {
+    public double minCol(String label) {
         int i = indexLabel(label);
         if (i != -1) {
-            dataframes.get(i).min();
+            return dataframes.get(i).min();
         } else {
             System.out.println("Impossible min !!");
+            return 0;
         }
     }
 
-    public void maxCol(String label) {
+    public double maxCol(String label) {
         int i = indexLabel(label);
         if (i != -1) {
-            dataframes.get(i).max();
+            return dataframes.get(i).max();
         } else {
             System.out.println("Impossible Max !!");
+            return 0;
         }
     }
 
@@ -221,7 +240,6 @@ public class Dataframe {
         return data;
     }
 
-    //Regrouper les données -> d //demander au prof
     public Dataframe groupby(String... label) {
         Dataframe data = this.clone();
         //Sécurité
