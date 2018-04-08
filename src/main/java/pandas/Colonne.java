@@ -102,6 +102,14 @@ public class Colonne {
         return type;
     }
 
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public String getLabel() {
         return label;
     }

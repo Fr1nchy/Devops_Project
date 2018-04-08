@@ -41,7 +41,7 @@ public class CalculatorArray {
         for (int i = 0; i < d.size(); i++) {
             resultat += Double.parseDouble(d.get(i));
         }
-        resultat = (resultat / (d.size() - 1));
+        resultat = (resultat / (d.size()));
         return resultat;
     }
 
