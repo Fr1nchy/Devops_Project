@@ -22,17 +22,25 @@ public class PandasTest {
     }
 
     @Test(timeout = 100)
-    public void testConstructeurCSV() {
-        //Champs vide
+    public void testCSVchampvide() {
         d = new Dataframe("");
         assertTrue(d.getDataframes() == null);
-        //tableau d'element vide
+    }
+    
+    @Test(timeout = 100)
+    public void testCSVelementvide() {
         d = new Dataframe("testelement.csv");
-        assertTrue(d.getDataframes() == null);
-        //CSV vide
+        assertTrue(d.getDataframes() == null);        
+    }
+    
+    @Test(timeout = 100)
+    public void testCSVfichiervide() {
         d = new Dataframe("testempty.csv");
         assertTrue(d.getDataframes().isEmpty());
-        //Que des labels et pas de données
+    }
+    
+    @Test(timeout = 100)
+    public void testCSVuniquementdeslabels() {
         d = new Dataframe("testlabels.csv");
         assertTrue(d.getDataframes().size() == 4);
         //Label
@@ -50,13 +58,21 @@ public class PandasTest {
         assertTrue(d.getDataframes().get(1).getTab().isEmpty());
         assertTrue(d.getDataframes().get(2).getTab().isEmpty());
         assertTrue(d.getDataframes().get(3).getTab().isEmpty());
-
-        //Sécurité taille des colonnes identiques
+    }
+    
+    @Test(timeout = 100)
+    public void testCSVtaillecolonne() {
         d = new Dataframe("testtaille.csv");
-        assertTrue(d.getDataframes() == null);
-        //sécurité id identique 
+        assertTrue(d.getDataframes() == null);   
+    }
+    
+    @Test(timeout = 100)
+    public void testCSVlabelidentique() {
         d = new Dataframe("ididentique.csv");
         assertTrue(d.getDataframes() == null);
+    }
+    @Test(timeout = 100)
+    public void testConstructeurCSV() {
         //Fonctionnement normal
         d = new Dataframe("sample.csv");
         assertTrue(d.getDataframes().size() == 4);

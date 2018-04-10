@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import pandas.Exception.ArgumentException;
+import pandas.Exception.EmptyDataException;
+import pandas.Exception.OperationException;
+import pandas.Exception.TypeOrIndexException;
 
 public class Dataframe {
 
@@ -96,7 +100,6 @@ public class Dataframe {
                 i++;
             }
             if (!b) {
-                System.out.println("Erreur de taille ");
                 dataframes = null;
             }
         }
@@ -245,7 +248,8 @@ public class Dataframe {
             return dataframes.get(i).mean();
         } else {
             System.out.println("Impossible Mean !!");
-            return 0;
+            throw new ArgumentException();
+            //return Double.NaN;
         }
     }
 
@@ -255,7 +259,8 @@ public class Dataframe {
             return dataframes.get(i).sum();
         } else {
             System.out.println("Impossible Sum !!");
-            return 0;
+            throw new ArgumentException();
+            //return Double.NaN;
         }
     }
 
@@ -265,7 +270,8 @@ public class Dataframe {
             return dataframes.get(i).min();
         } else {
             System.out.println("Impossible min !!");
-            return 0;
+            throw new ArgumentException();
+            //return Double.NaN;
         }
     }
 
@@ -275,7 +281,8 @@ public class Dataframe {
             return dataframes.get(i).max();
         } else {
             System.out.println("Impossible Max !!");
-            return 0;
+            throw new ArgumentException();
+            //return Double.NaN;
         }
     }
 
@@ -363,9 +370,11 @@ public class Dataframe {
                 }
             } else {
                 System.out.println("Erreur de group by");
+                throw new ArgumentException();
             }
         } else {
             System.out.println("Dataframe vide");
+            throw new EmptyDataException();
         }
         return data;
     }
@@ -389,7 +398,7 @@ public class Dataframe {
         if (d != null && !d.getDataframes().isEmpty()) {
 
             int i = indexLabel(label);
-            if (i != -1 && op >= 0 && op <= 3 && (d.getDataframes().get(i).getType() == 2 || d.getDataframes().get(i).getType() == 1)) {
+            if (i != -1 && (d.getDataframes().get(i).getType() == 2 || d.getDataframes().get(i).getType() == 1)) {
                 double res = 0;
                 for (int j = 0; j < d.getDataframes().get(i).getTab().size(); j++) {
                     switch (op) {
@@ -407,6 +416,7 @@ public class Dataframe {
                             break;
                         default:
                             System.out.println("Erreur Opération !!");
+                            throw new OperationException();
                     }
 
                     d.getDataframes().get(i).getTab().remove(j);
@@ -418,6 +428,7 @@ public class Dataframe {
 
             } else {
                 System.out.println("Impossible Opération !!");
+                throw new TypeOrIndexException();
             }
         }
         return d;
