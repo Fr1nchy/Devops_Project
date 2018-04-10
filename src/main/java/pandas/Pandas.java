@@ -15,7 +15,7 @@ public class Pandas {
 
     public static void main(String[] args) {
         Dataframe d;
-        d = new Dataframe("doublon.csv");
+        /*d = new Dataframe("doublon.csv");
         d.afficherDataframe();
 
         d.meanCol("Age");
@@ -40,7 +40,7 @@ public class Pandas {
         Dataframe d4 = d3.groupbyOperation("Age", d.SUM);
         d4.afficherDataframe();
         
-                
+                */
         ArrayList<String> a = new ArrayList();
         ArrayList<String> a1 = new ArrayList();
         ArrayList<String> a2 = new ArrayList();
@@ -68,8 +68,9 @@ public class Pandas {
         a3.add("true");
         
         d = new Dataframe(a,a1,a2,a3);
+        d.groupby("Boolean").afficherDataframe();
         d.afficherDataframe();
-       
+        
     }
 
 }
