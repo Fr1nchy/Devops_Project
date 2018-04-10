@@ -6,6 +6,7 @@
 package pandas;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -14,63 +15,172 @@ import java.util.ArrayList;
 public class Pandas {
 
     public static void main(String[] args) {
-        Dataframe d;
-        /*d = new Dataframe("doublon.csv");
-        d.afficherDataframe();
+        Dataframe d = null;
+        Scanner input = new Scanner(System.in);
+        int choice = 0;
+        while ((choice = menuPrincipale()) != 3) {
+            switch (choice) {
+                case 1:
+                    System.out.println("Importer un CSV");
+                    System.out.println("Rentrer le nom du CSV");
+                    d = new Dataframe(input.next());
+                    break;
+                case 2:
+                    System.out.println("Rentrer manuellement les données");
+                    break;
+            }
+            while ((choice = menuSecondaire()) != 5) {
+                switch (choice) {
+                    case 1:
+                        System.out.println("Afficher");
+                        while ((choice = menu1()) != 4) {
+                            switch (choice) {
+                                case 1:
+                                    d.afficherDataframe();
+                                    break;
+                                case 2:
+                                    d.afficherPremieresLignes();
+                                    break;
+                                case 3:
+                                    d.afficherDernieresLignes();
+                                    break;
+                            }
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Sélectionner des données");
+                        while ((choice = menu2()) != 3) {
+                            switch (choice) {
+                                case 1:
+                                    d = d.selectDataLigne(input.nextInt());
+                                    break;
+                                case 2:
+                                    d = d.selectDataColonne(input.next());
+                                    break;
+                            }
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Opération sur colonne");
+                        while ((choice = menu3()) != 5) {
+                            System.out.println("Rentrer le nom du label");
+                            switch (choice) {
+                                case 1:
+                                    d.sumCol(input.next());
+                                    break;
+                                case 2:
+                                    d.minCol(input.next());
+                                    break;
+                                case 3:
+                                    d.maxCol(input.next());
+                                    break;
+                                case 4:
+                                    d.meanCol(input.next());
+                                    break;
+                            }
+                        }
+                        break;
+                    case 4:
+                        System.out.println("Opération de group");
+                        while ((choice = menu4()) != 3) {
+                            System.out.println("Rentrer le nom du label");
+                            switch (choice) {
+                                case 1:
+                                    d = d.groupby(input.next());
+                                    break;
+                                case 2:
+                                    System.out.println("Opération");
+                                    System.out.println("0 - Somme");
+                                    System.out.println("1 - Minimum");
+                                    System.out.println("2 - Maximum");
+                                    System.out.println("3 - Moyenne");
+                                    d = d.groupbyOperation(input.next(), input.nextInt());
+                                    break;
+                            }
+                        }
+                        break;
+                }
+            }
 
-        d.meanCol("Age");
-        d.maxCol("Age");
-        d.minCol("Age");
-        d.sumCol("Age");
-        System.out.println("");
-        d.afficherDernieresLignes();
-        System.out.println("");
-        d.afficherPremieresLignes();
-        System.out.println("");
-        Dataframe d2 = d.selectDataLigne(0, 1);
-        d2.afficherDataframe();
-        System.out.println("");
-        Dataframe d1 = d.selectDataColonne("First Name", "Age");
-        d1.afficherDataframe();
-        System.out.println("");
-        
-        Dataframe d3 = d.groupby("First Name");
-        d3.afficherDataframe();
-        
-        Dataframe d4 = d3.groupbyOperation("Age", d.SUM);
-        d4.afficherDataframe();
-        
-                */
-        ArrayList<String> a = new ArrayList();
-        ArrayList<String> a1 = new ArrayList();
-        ArrayList<String> a2 = new ArrayList();
-        ArrayList<String> a3 = new ArrayList();
-        ArrayList<String> a4 = new ArrayList();
-        
-        a.add("Int");
-        a.add("0");
-        a.add("1");
-        a.add("2");
-        
-        a1.add("Float");
-        a1.add("0.1");
-        a1.add("1.894");
-        a1.add("2");
-        
-        a2.add("String");
-        a2.add("10");
-        a2.add("boolean");
-        a2.add("2.1485");
-        
-        a3.add("Boolean");
-        a3.add("true");
-        a3.add("false");
-        a3.add("true");
-        
-        d = new Dataframe(a,a1,a2,a3);
-        d.groupby("Boolean").afficherDataframe();
-        d.afficherDataframe();
-        
+        }
+
+    }
+
+    public static int menuPrincipale() {
+        int selection;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choisir votre choix");
+        System.out.println("-------------------------\n");
+        System.out.println("1 - Importer un CSV");
+        System.out.println("2 - Rentrer manuellement les données");
+        System.out.println("3 - Quit");
+        selection = input.nextInt();
+        return selection;
+    }
+
+    public static int menuSecondaire() {
+        int selection;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choisir votre choix");
+        System.out.println("-------------------------\n");
+        System.out.println("1 - Afficher");
+        System.out.println("2 - Sélectionner des données");
+        System.out.println("3 - Opération sur colonne");
+        System.out.println("4 - Opération de group");
+        System.out.println("5 - Retour");
+        selection = input.nextInt();
+        return selection;
+    }
+
+    public static int menu1() {
+        int selection;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choisir votre choix");
+        System.out.println("-------------------------\n");
+        System.out.println("1 - Afficher dataframe");
+        System.out.println("2 - Afficher les premieres lignes");
+        System.out.println("3 - Afficher les dernieres lignes");
+        System.out.println("4 - Retour");
+        selection = input.nextInt();
+        return selection;
+    }
+
+    public static int menu2() {
+        int selection;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choisir votre choix");
+        System.out.println("-------------------------\n");
+        System.out.println("1 - Sélectionner des lignes");
+        System.out.println("2 - Sélectionner des colonnes");
+        System.out.println("3 - Retour");
+        selection = input.nextInt();
+        return selection;
+    }
+
+    public static int menu3() {
+        int selection;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choisir votre choix");
+        System.out.println("-------------------------\n");
+        System.out.println("1 - Somme d'une colonne");
+        System.out.println("2 - Minimum d'une colonne");
+        System.out.println("3 - Maximum d'une colonne");
+        System.out.println("4 - Moyenne d'une colonne");
+        System.out.println("5 - Retour");
+        selection = input.nextInt();
+        return selection;
+    }
+
+    public static int menu4() {
+        int selection;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choisir votre choix");
+        System.out.println("-------------------------\n");
+        System.out.println("1 - Effectuer un group by");
+        System.out.println("2 - Opération sur le group by");
+        System.out.println("3 - Retour");
+        selection = input.nextInt();
+        return selection;
     }
 
 }

@@ -64,6 +64,7 @@ public class Dataframe {
         }
         if (!b) {
             dataframes = null;
+            throw new ArgumentException();
         }
     }
 
