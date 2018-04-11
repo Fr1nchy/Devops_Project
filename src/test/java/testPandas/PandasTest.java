@@ -1,9 +1,10 @@
+package testPandas;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -32,19 +33,19 @@ public class PandasTest {
     }
 
     @Test(expected = ArgumentException.class)
-    public void testCSVElementVide() {
-        d = new Dataframe("testelement.csv");
+    public void testCSVElementVide() {        
+        d = new Dataframe("src/test/ressources/testelement.csv");
     }
 
     @Test(timeout = 100)
     public void testCSVFichierVide() {
-        d = new Dataframe("testempty.csv");
+        d = new Dataframe("src/test/ressources/testempty.csv");
         assertTrue(d.getDataframes().isEmpty());
     }
 
     @Test(timeout = 100)
     public void testCSVUniquementDesLabels() {
-        d = new Dataframe("testlabels.csv");
+        d = new Dataframe("src/test/ressources/testlabels.csv");
         assertTrue(d.getDataframes().size() == 4);
         //Label
         assertTrue(d.getDataframes().get(0).getLabel().equals("First Name"));
@@ -65,18 +66,18 @@ public class PandasTest {
 
     @Test(expected = ArgumentException.class)
     public void testCSVTailleColonne() {
-        d = new Dataframe("testtaille.csv");
+        d = new Dataframe("src/test/ressources/testtaille.csv");
     }
 
     @Test(expected = ArgumentException.class)
     public void testCSVLabelIdentique() {
-        d = new Dataframe("ididentique.csv");
+        d = new Dataframe("src/test/ressources/ididentique.csv");
     }
 
     @Test(timeout = 100)
     public void testCSV() {
         //Fonctionnement normal
-        d = new Dataframe("sample.csv");
+        d = new Dataframe("src/test/ressources/sample.csv");
         assertTrue(d.getDataframes().size() == 4);
         //Label
         assertTrue(d.getDataframes().get(0).getLabel().equals("First Name"));
@@ -301,7 +302,7 @@ public class PandasTest {
     @Test(timeout = 100)
     public void testSelectDataLigneIndexHorsChamp() {
         //Securité index hors champs
-        d = new Dataframe("sample.csv");
+        d = new Dataframe("src/test/ressources/sample.csv");
         Dataframe d2 = d.selectDataLigne(15);
         assertTrue(d.getDataframes().size() == 4);
         //Label
@@ -324,7 +325,7 @@ public class PandasTest {
     @Test(timeout = 100)
     public void testSelectDataLigneIndexIdentique() {
         //Securité index identique
-        d = new Dataframe("sample.csv");
+        d = new Dataframe("src/test/ressources/sample.csv");
         Dataframe d2 = d.selectDataLigne(0, 0, 0);
         assertTrue(d2.getDataframes().size() == 4);
         //Label
@@ -360,7 +361,7 @@ public class PandasTest {
     @Test(timeout = 100)
     public void testSelectDataLigne() {
         //Fonctionnement normal
-        d = new Dataframe("sample.csv");
+        d = new Dataframe("src/test/ressources/sample.csv");
         Dataframe d2 = d.selectDataLigne(0, 1);
         assertTrue(d2.getDataframes().size() == 4);
         //Label
@@ -412,7 +413,7 @@ public class PandasTest {
     @Test(timeout = 100)
     public void testSelectDataColonneLabalHorsChamp() {
         //Sécurité label hors champ
-        d = new Dataframe("sample.csv");
+        d = new Dataframe("src/test/ressources/sample.csv");
         Dataframe d2 = d.selectDataColonne("nnnnnnn");
         assertTrue(d2.getDataframes().isEmpty());
     }
@@ -420,7 +421,7 @@ public class PandasTest {
     @Test(timeout = 100)
     public void testSelectDataColonneLabelIdentique() {
         //Sécurité label identique
-        d = new Dataframe("sample.csv");
+        d = new Dataframe("src/test/ressources/sample.csv");
         Dataframe d2 = d.selectDataColonne("First Name", "First Name");
         assertTrue(d2.getDataframes().size() == 1);
         //Label
@@ -441,7 +442,7 @@ public class PandasTest {
     @Test(timeout = 100)
     public void testSelectDataColonne() {
         //Fonctionnement normal
-        d = new Dataframe("sample.csv");
+        d = new Dataframe("src/test/ressources/sample.csv");
         Dataframe d2 = d.selectDataColonne("First Name", "Age");
         assertTrue(d2.getDataframes().size() == 2);
         //Label
@@ -909,7 +910,7 @@ public class PandasTest {
         String tmp = d.afficherPremieresLignes().replaceAll(" ", "").replaceAll("\n", "");
         assertEquals(tmp, "Dataframepremiereligne:g[1][2]");
     }
-    
+
     @Test(timeout = 100)
     public void afficherPremieresLignes1() {
         ArrayList<String> a = new ArrayList<>();
