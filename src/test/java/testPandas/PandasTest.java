@@ -878,7 +878,7 @@ public class PandasTest {
     public void afficherDataframeVide() {
         d = new Dataframe();
         assertTrue(d.getDataframes().isEmpty());
-        assertEquals(d.afficherDataframe(), "Dataframe:");
+        assertEquals(d.afficherDataframe(), "Dataframe:\n");
     }
 
     @Test(timeout = 100)
@@ -895,7 +895,7 @@ public class PandasTest {
     public void afficherPremieresLignesVide() {
         d = new Dataframe();
         assertTrue(d.getDataframes().isEmpty());
-        assertEquals(d.afficherPremieresLignes(), "Dataframe premiere ligne:");
+        assertEquals(d.afficherPremieresLignes(), "Dataframe premiere ligne:\n");
     }
 
     @Test(timeout = 100)
@@ -924,7 +924,7 @@ public class PandasTest {
     public void afficherDernieresLignesVide() {
         d = new Dataframe();
         assertTrue(d.getDataframes().isEmpty());
-        assertEquals(d.afficherDernieresLignes(), "Dataframe derniere ligne:");
+        assertEquals(d.afficherDernieresLignes(), "Dataframe derniere ligne:\n");
     }
 
     @Test(timeout = 100)

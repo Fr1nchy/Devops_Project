@@ -43,7 +43,7 @@ public class Pandas {
                         }
                         c.add(new Colonne(tmp, label));
                     }
-
+                    d.setDataframes(c);
                     break;
             }
             while ((choice = menuSecondaire()) != 5) {

@@ -179,16 +179,16 @@ public class Dataframe {
     private String showLabel() {
         String res = "";
         for (int i = 0; i < dataframes.size(); i++) {
-            System.out.print(dataframes.get(i).getLabel() + " ");
+            //System.out.print(dataframes.get(i).getLabel() + " ");
             res = res + dataframes.get(i).getLabel() + " ";
         }
-        //res = res +"\n";
+        res = res + "\n";
         //System.out.print("\n");
         return res;
     }
 
     public String afficherDataframe() {
-        String res = "Dataframe:";
+        String res = "Dataframe:\n";
         //System.out.println("Dataframe:");
         if (dataframes != null && !dataframes.isEmpty()) {
             res = res + showLabel();
@@ -207,9 +207,9 @@ public class Dataframe {
     }
 
     public String afficherPremieresLignes() {
-        String res = "Dataframe premiere ligne:";
+        String res = "Dataframe premiere ligne:\n";
         //System.out.println("Dataframe premiere ligne:");
-        
+
         if (dataframes != null && !dataframes.isEmpty()) {
             res = res + showLabel();
             int taille = 0;
@@ -221,7 +221,7 @@ public class Dataframe {
             for (int i = 0; i < taille; i++) {
                 for (int j = 0; j < dataframes.size(); j++) {
                     //System.out.print(dataframes.get(j).getTab().get(i) + " ");
-                    res = res +dataframes.get(j).getTab().get(i) + " ";
+                    res = res + dataframes.get(j).getTab().get(i) + " ";
                 }
                 //System.out.print("\n");
                 res = res + "\n";
@@ -231,17 +231,19 @@ public class Dataframe {
     }
 
     public String afficherDernieresLignes() {
-        String res = "Dataframe derniere ligne:";
+        String res = "Dataframe derniere ligne:\n";
         //System.out.println("Dataframe derniere ligne:");
         if (dataframes != null && !dataframes.isEmpty()) {
             res = res + showLabel();
-            for (int i = dataframes.get(0).getTab().size() - 1; i < dataframes.get(0).getTab().size(); i++) {
-                for (int j = 0; j < dataframes.size(); j++) {
-                    //System.out.print(dataframes.get(j).getTab().get(i) + " ");
-                    res = res + dataframes.get(j).getTab().get(i) + " ";
+            if (dataframes.get(0).getTab().size() > 0) {
+                for (int i = dataframes.get(0).getTab().size() - 1; i < dataframes.get(0).getTab().size(); i++) {
+                    for (int j = 0; j < dataframes.size(); j++) {
+                        //System.out.print(dataframes.get(j).getTab().get(i) + " ");
+                        res = res + dataframes.get(j).getTab().get(i) + " ";
+                    }
+                    //System.out.print("\n");
+                    res = res + "\n";
                 }
-                //System.out.print("\n");
-                res = res + "\n";
             }
         }
         return res;
