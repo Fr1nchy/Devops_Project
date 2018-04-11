@@ -26,7 +26,24 @@ public class Pandas {
                     d = new Dataframe(input.next());
                     break;
                 case 2:
-                    System.out.println("Rentrer manuellement les données");
+                    d = new Dataframe();
+                    ArrayList<Colonne> c = new ArrayList<>();
+
+                    while ((choice = menuDonnee()) != 2) {
+                        System.out.println("Rentrer un label");
+                        String label = input.next();
+
+                        ArrayList<ArrayList<String>> tmp = new ArrayList<>();
+
+                        while ((choice = menuDonneeTab()) != 2) {
+                            System.out.println("Rentrer une donnée:");
+                            ArrayList<String> tmpn = new ArrayList<>();
+                            tmpn.add(input.next());
+                            tmp.add(tmpn);
+                        }
+                        c.add(new Colonne(tmp, label));
+                    }
+
                     break;
             }
             while ((choice = menuSecondaire()) != 5) {
@@ -36,13 +53,13 @@ public class Pandas {
                         while ((choice = menu1()) != 4) {
                             switch (choice) {
                                 case 1:
-                                    d.afficherDataframe();
+                                    System.out.println(d.afficherDataframe());
                                     break;
                                 case 2:
-                                    d.afficherPremieresLignes();
+                                    System.out.println(d.afficherPremieresLignes());
                                     break;
                                 case 3:
-                                    d.afficherDernieresLignes();
+                                    System.out.println(d.afficherDernieresLignes());
                                     break;
                             }
                         }
@@ -114,6 +131,28 @@ public class Pandas {
         System.out.println("1 - Importer un CSV");
         System.out.println("2 - Rentrer manuellement les données");
         System.out.println("3 - Quit");
+        selection = input.nextInt();
+        return selection;
+    }
+
+    public static int menuDonnee() {
+        int selection;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choisir votre choix");
+        System.out.println("-------------------------\n");
+        System.out.println("1 - Rentrer manuellement les données");
+        System.out.println("2 - Fin");
+        selection = input.nextInt();
+        return selection;
+    }
+
+    public static int menuDonneeTab() {
+        int selection;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choisir votre choix");
+        System.out.println("-------------------------\n");
+        System.out.println("1 - Rentrer une donnée");
+        System.out.println("2 - Fin");
         selection = input.nextInt();
         return selection;
     }
