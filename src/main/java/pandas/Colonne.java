@@ -22,12 +22,11 @@ public class Colonne {
     public double max() {
         double resultat = 0;
         double tmp = 0;
-        if (type == 1 || type == 2) {
-            for (int i = 0; i < tab.size(); i++) {
-                tmp = CalculatorArray.max(tab.get(i));
-                if (tmp > resultat) {
-                    resultat = tmp;
-                }
+        System.out.println("type:" + type);
+        for (int i = 0; i < tab.size(); i++) {
+            tmp = CalculatorArray.max(tab.get(i));
+            if (tmp > resultat) {
+                resultat = tmp;
             }
         }
         System.out.println("Max colonne:" + resultat);
@@ -37,14 +36,13 @@ public class Colonne {
     public double min() {
         double resultat = Double.MAX_VALUE;
         double tmp = 0;
-        if (type == 1 || type == 2) {
-            for (int i = 0; i < tab.size(); i++) {
-                tmp = CalculatorArray.min(tab.get(i));
-                if (tmp < resultat) {
-                    resultat = tmp;
-                }
+        for (int i = 0; i < tab.size(); i++) {
+            tmp = CalculatorArray.min(tab.get(i));
+            if (tmp < resultat) {
+                resultat = tmp;
             }
         }
+
         System.out.println("Min colonne:" + resultat);
         return resultat;
     }
@@ -65,7 +63,7 @@ public class Colonne {
                 resultat += Double.parseDouble(tab.get(i).get(j));
             }
         }
-        resultat = (resultat / (tab.size()+tab.get(0).size() - 1));
+        resultat = (resultat / (tab.size() + tab.get(0).size() - 1));
         System.out.println("Mean colonne:" + resultat);
         return resultat;
     }

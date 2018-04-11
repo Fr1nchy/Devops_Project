@@ -176,58 +176,75 @@ public class Dataframe {
         return data;
     }
 
-    private void showLabel() {
+    private String showLabel() {
+        String res = "";
         for (int i = 0; i < dataframes.size(); i++) {
             System.out.print(dataframes.get(i).getLabel() + " ");
+            res = res + dataframes.get(i).getLabel() + " ";
         }
-        System.out.print("\n");
+        //res = res +"\n";
+        //System.out.print("\n");
+        return res;
     }
 
-    public void afficherDataframe() {
-        System.out.println("Dataframe:");
+    public String afficherDataframe() {
+        String res = "Dataframe:";
+        //System.out.println("Dataframe:");
         if (dataframes != null && !dataframes.isEmpty()) {
-            showLabel();
+            res = res + showLabel();
             for (int i = 0; i < dataframes.get(0).getTab().size(); i++) {
                 for (int j = 0; j < dataframes.size(); j++) {
-                    System.out.print(dataframes.get(j).getTab().get(i) + " ");
+                    //System.out.print(dataframes.get(j).getTab().get(i) + " ");
+                    res = res + dataframes.get(j).getTab().get(i) + " ";
                 }
-                System.out.print("\n");
+                //System.out.print("\n");
+                res = res + "\n";
             }
-            System.out.print("\n");
+            //System.out.print("\n");
+            res = res + "\n";
         }
+        return res;
     }
 
-    public void afficherPremieresLignes() {
-        System.out.println("Dataframe premiere ligne:");
-
+    public String afficherPremieresLignes() {
+        String res = "Dataframe premiere ligne:";
+        //System.out.println("Dataframe premiere ligne:");
+        
         if (dataframes != null && !dataframes.isEmpty()) {
-            showLabel();
+            res = res + showLabel();
             int taille = 0;
             if (dataframes.get(0).getTab().size() > 1) {
                 taille = 2;
             } else {
-                taille = dataframes.size();
+                taille = dataframes.get(0).getTab().size();
             }
             for (int i = 0; i < taille; i++) {
                 for (int j = 0; j < dataframes.size(); j++) {
-                    System.out.print(dataframes.get(j).getTab().get(i) + " ");
+                    //System.out.print(dataframes.get(j).getTab().get(i) + " ");
+                    res = res +dataframes.get(j).getTab().get(i) + " ";
                 }
-                System.out.print("\n");
+                //System.out.print("\n");
+                res = res + "\n";
             }
         }
+        return res;
     }
 
-    public void afficherDernieresLignes() {
-        System.out.println("Dataframe derniere ligne:");
+    public String afficherDernieresLignes() {
+        String res = "Dataframe derniere ligne:";
+        //System.out.println("Dataframe derniere ligne:");
         if (dataframes != null && !dataframes.isEmpty()) {
-            showLabel();
+            res = res + showLabel();
             for (int i = dataframes.get(0).getTab().size() - 1; i < dataframes.get(0).getTab().size(); i++) {
                 for (int j = 0; j < dataframes.size(); j++) {
-                    System.out.print(dataframes.get(j).getTab().get(i) + " ");
+                    //System.out.print(dataframes.get(j).getTab().get(i) + " ");
+                    res = res + dataframes.get(j).getTab().get(i) + " ";
                 }
-                System.out.print("\n");
+                //System.out.print("\n");
+                res = res + "\n";
             }
         }
+        return res;
     }
 
     private int indexLabel(String label) {

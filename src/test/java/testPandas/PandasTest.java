@@ -530,12 +530,19 @@ public class PandasTest {
     }
 
     @Test(expected = ArgumentException.class)
-    public void testMaxColType() {
+    public void testMaxColTypeBoolean() {
         //Sécurité opération impossible string/boolean
         ArrayList<String> a = addAuto(0);
         d = new Dataframe(a);
         d.maxCol("Boolean");
+    }
 
+    @Test(expected = ArgumentException.class)
+    public void testMaxColTypeString() {
+        //Sécurité opération impossible string/boolean
+        ArrayList<String> a = addAuto(3);
+        d = new Dataframe(a);
+        d.maxCol("String");
     }
 
     @Test(expected = ArgumentException.class)
@@ -547,11 +554,19 @@ public class PandasTest {
     }
 
     @Test(timeout = 100)
-    public void testMaxCol() {
+    public void testMaxColInt() {
         //Fonctionnement normal
         ArrayList<String> a = addAuto(1);
         d = new Dataframe(a);
         assertEquals(d.maxCol("Int"), 2, 0.0);
+    }
+
+    @Test(timeout = 100)
+    public void testMaxColFloat() {
+        //Fonctionnement normal
+        ArrayList<String> a = addAuto(2);
+        d = new Dataframe(a);
+        assertEquals(d.maxCol("Float"), 2, 0.0);
     }
 
     @Test(expected = ArgumentException.class)
@@ -826,6 +841,102 @@ public class PandasTest {
         d = new Dataframe(b, g);
         d = d.groupby("g");
         Dataframe d2 = d.groupbyOperation("h", d.SUM);
+    }
+
+    @Test(timeout = 100)
+    public void colonneSetLabel() {
+        ArrayList<String> a = new ArrayList<>();
+        a.add("g");
+        a.add("1");
+        d = new Dataframe(a);
+        d.getDataframes().get(0).setLabel("test");
+        assertTrue(d.getDataframes().size() == 1);
+        assertTrue(d.getDataframes().get(0).getType() == 1);
+        assertTrue(d.getDataframes().get(0).getTab().get(0).size() == 1);
+        assertTrue(d.getDataframes().get(0).getLabel().equals("test"));
+    }
+
+    @Test(timeout = 100)
+    public void colonneSetTab() {
+        ArrayList<String> a = new ArrayList<>();
+        a.add("g");
+        d = new Dataframe(a);
+        ArrayList<ArrayList<String>> b = new ArrayList<>();
+        a = new ArrayList<>();
+        a.add("1");
+        b.add(a);
+        d.getDataframes().get(0).setTab(b);
+        assertTrue(d.getDataframes().size() == 1);
+        assertTrue(d.getDataframes().get(0).getType() == 1);
+        assertEquals(d.getDataframes().get(0).getLabel(), "g");
+        assertTrue(d.getDataframes().get(0).getTab().get(0).size() == 1);
+        assertEquals(d.getDataframes().get(0).getTab().get(0).get(0), "1");
+
+    }
+
+    @Test(timeout = 100)
+    public void afficherDataframeVide() {
+        d = new Dataframe();
+        assertTrue(d.getDataframes().isEmpty());
+        assertEquals(d.afficherDataframe(), "Dataframe:");
+    }
+
+    @Test(timeout = 100)
+    public void afficherDataframe() {
+        ArrayList<String> a = new ArrayList<>();
+        a.add("g");
+        a.add("1");
+        d = new Dataframe(a);
+        String tmp = d.afficherDataframe().replaceAll(" ", "").replaceAll("\n", "");
+        assertEquals(tmp, "Dataframe:g[1]");
+    }
+
+    @Test(timeout = 100)
+    public void afficherPremieresLignesVide() {
+        d = new Dataframe();
+        assertTrue(d.getDataframes().isEmpty());
+        assertEquals(d.afficherPremieresLignes(), "Dataframe premiere ligne:");
+    }
+
+    @Test(timeout = 100)
+    public void afficherPremieresLignes() {
+        ArrayList<String> a = new ArrayList<>();
+        a.add("g");
+        a.add("1");
+        a.add("2");
+        a.add("3");
+        d = new Dataframe(a);
+        String tmp = d.afficherPremieresLignes().replaceAll(" ", "").replaceAll("\n", "");
+        assertEquals(tmp, "Dataframepremiereligne:g[1][2]");
+    }
+    
+    @Test(timeout = 100)
+    public void afficherPremieresLignes1() {
+        ArrayList<String> a = new ArrayList<>();
+        a.add("g");
+        a.add("1");
+        d = new Dataframe(a);
+        String tmp = d.afficherPremieresLignes().replaceAll(" ", "").replaceAll("\n", "");
+        assertEquals(tmp, "Dataframepremiereligne:g[1]");
+    }
+
+    @Test(timeout = 100)
+    public void afficherDernieresLignesVide() {
+        d = new Dataframe();
+        assertTrue(d.getDataframes().isEmpty());
+        assertEquals(d.afficherDernieresLignes(), "Dataframe derniere ligne:");
+    }
+
+    @Test(timeout = 100)
+    public void afficherDernieresLignes() {
+        ArrayList<String> a = new ArrayList<>();
+        a.add("g");
+        a.add("1");
+        a.add("2");
+        a.add("3");
+        d = new Dataframe(a);
+        String tmp = d.afficherDernieresLignes().replaceAll(" ", "").replaceAll("\n", "");
+        assertEquals(tmp, "Dataframederniereligne:g[3]");
     }
 
 }
