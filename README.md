@@ -13,3 +13,5 @@
   partager
 
 • execution jacoco : mvn clean jacoco:prepare-agent install jacoco:report
+• execution test junit: mvn test 
+
