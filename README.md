@@ -11,3 +11,5 @@
 • install :  Installe le package dans le dépôt local</br>
 • deploy : Copie le package final dans un dépôt distant pour le
   partager
+
+• execution jacoco : mvn clean jacoco:prepare-agent install jacoco:report

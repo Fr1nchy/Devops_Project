@@ -1,77 +1,100 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>PandasDevops</groupId>
-	<artifactId>JPandas</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>PandasDevops</groupId>
+    <artifactId>JPandas</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-	<name>JPandas</name>
-	<url>https://github.com/Jaks-Hat/Devops_Project</url>
-	<description>Projet DEVOPS de création d'une bibliothèque 
-	d'analyse de données JPandas en Java s'inspirant du package 
-	Pandas développé en Python</description>
+    <name>JPandas</name>
+    <url>https://github.com/Jaks-Hat/Devops_Project</url>
+    <description>Projet DEVOPS de création d'une bibliothèque 
+        d'analyse de données JPandas en Java s'inspirant du package 
+        Pandas développé en Python</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	 <maven.compiler.source>1.8</maven.compiler.source>
-	 <maven.compiler.target>1.8</maven.compiler.target>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
-	<!--Une dépendance est une bibliothèque à inclure.
-	Il est possible de récupérer son bloc XML / artefact sur le
-	Repository central de Maven http://search.maven.org/.
-	L'artefact identifie de manière unique la dépendance, il 
-	correspond à l'ensemble des coordonnées :
-	groupId:artifactId:packaging:version.
-	Il existe d'autres moteurs de recherche, parfois plus à jour
-	comme MVN Repository http://mvnrepository.com-->
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <!--Une dépendance est une bibliothèque à inclure.
+    Il est possible de récupérer son bloc XML / artefact sur le
+    Repository central de Maven http://search.maven.org/.
+    L'artefact identifie de manière unique la dépendance, il 
+    correspond à l'ensemble des coordonnées :
+    groupId:artifactId:packaging:version.
+    Il existe d'autres moteurs de recherche, parfois plus à jour
+    comme MVN Repository http://mvnrepository.com-->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<!--build est la section permettant de déclarer la structure 
-	de notre projet.
-	Elle permet également de déclarer et configurer les plugins.
-	https://maven.apache.org/pom.html#Build_Settings-->
-	<!--Un plugin est un fragment logiciel qui se spécialise dans une
-	tâche donnée. Il peut exécuter un ensemble de goals / tâches
-	de base. Comme pour une dépendance, il est possible de 
-	récupérer l'artefact d'un plugin à partir des moteurs de 
-	recherche cités ci-dessus-->
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>1.5.2</version>
-			</plugin>
-		</plugins>
-	</build>
+    <!--build est la section permettant de déclarer la structure 
+    de notre projet.
+    Elle permet également de déclarer et configurer les plugins.
+    https://maven.apache.org/pom.html#Build_Settings-->
+    <!--Un plugin est un fragment logiciel qui se spécialise dans une
+    tâche donnée. Il peut exécuter un ensemble de goals / tâches
+    de base. Comme pour une dépendance, il est possible de 
+    récupérer l'artefact d'un plugin à partir des moteurs de 
+    recherche cités ci-dessus-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.1</version>
+                <executions>
+                    <execution>
+                        <id>pre-unit-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+                            <propertyName>surefireArgLine</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-	<!--Un cycle de vie est une série de phases ordonnées.
-	Il définit les étapes clés(= les phases) de la construction
-	du projet.
-	Il y a 3 cycles de vie prédéfinis :
-	* default : construire le projet
-	* clean : nettoyage du projet
-	* site : création de la documentation du projet
-	Les phases principales du cycle de vie par défaut sont :
-	* validate
-	* compile
-	* test
-	* package
-	* integration-test
-	* verify
-	* install
-	* deploy
-	L'exécution d'une phase d'un cycle entraîne l'exécution de
-	toutes les phases précédentes-->
-	<!--L'exécution d'une phase correspond à l'exécution de toutes
-	les tâches qui lui ont été associées-->
+    <!--Un cycle de vie est une série de phases ordonnées.
+    Il définit les étapes clés(= les phases) de la construction
+    du projet.
+    Il y a 3 cycles de vie prédéfinis :
+    * default : construire le projet
+    * clean : nettoyage du projet
+    * site : création de la documentation du projet
+    Les phases principales du cycle de vie par défaut sont :
+    * validate
+    * compile
+    * test
+    * package
+    * integration-test
+    * verify
+    * install
+    * deploy
+    L'exécution d'une phase d'un cycle entraîne l'exécution de
+    toutes les phases précédentes-->
+    <!--L'exécution d'une phase correspond à l'exécution de toutes
+    les tâches qui lui ont été associées-->
 </project>
