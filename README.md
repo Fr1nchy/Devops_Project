@@ -11,12 +11,17 @@
 • install :  Installe le package dans le dépôt local</br>
 • deploy : Copie le package final dans un dépôt distant pour le
   partager
-
+  
+  
+Pour executer :
 • execution jacoco : mvn clean jacoco:prepare-agent install jacoco:report
 • execution test junit: mvn test 
+• execution site junit: mvn clean jacoco:prepare-agent install jacoco:report ; mvn site
 
-• Amélioration possible :
-Utiliser des hashtables
-Utiliser des types Comparables
-Ajouter des d'autres opérations (count,cumsum,...)
+
+
+Amélioration possible :
+• Utiliser des hashtables
+• Utiliser des types Comparables
+• Ajouter des d'autres opérations (count,cumsum,...)
 
