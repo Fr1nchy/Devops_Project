@@ -14,9 +14,9 @@
   
   
 Pour executer :</br>
-• execution jacoco : mvn clean jacoco:prepare-agent install jacoco:report</br>
-• execution test junit: mvn test </br>
-• execution site junit: mvn clean jacoco:prepare-agent install jacoco:report ; mvn site</br>
+• execution jacoco :      mvn clean jacoco:prepare-agent install jacoco:report</br>
+• execution test junit:   mvn test </br>
+• execution site:         mvn clean jacoco:prepare-agent install jacoco:report ; mvn site</br>
 
 
 
