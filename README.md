@@ -15,3 +15,8 @@
 • execution jacoco : mvn clean jacoco:prepare-agent install jacoco:report
 • execution test junit: mvn test 
 
+• Amélioration possible :
+Utiliser des hashtables
+Utiliser des types Comparables
+Ajouter des d'autres opérations (count,cumsum,...)
+
