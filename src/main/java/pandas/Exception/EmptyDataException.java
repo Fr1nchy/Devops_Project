@@ -11,7 +11,8 @@ package pandas.Exception;
  */
 public class EmptyDataException extends RuntimeException {
 
-    public EmptyDataException() {
+    public EmptyDataException(String s) {
+        super(s);
     }
     
 }

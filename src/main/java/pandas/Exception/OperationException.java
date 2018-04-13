@@ -11,7 +11,8 @@ package pandas.Exception;
  */
 public class OperationException extends RuntimeException {
 
-    public OperationException() {
+    public OperationException(String s) {
+        super(s);
     }
-    
+
 }

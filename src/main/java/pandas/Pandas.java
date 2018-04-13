@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Pandas {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {        
         Dataframe d = null;
         Scanner input = new Scanner(System.in);
         int choice = 0;
@@ -26,24 +26,19 @@ public class Pandas {
                     d = new Dataframe(input.next());
                     break;
                 case 2:
-                    d = new Dataframe();
-                    ArrayList<Colonne> c = new ArrayList<>();
-
+                                       
+                    ArrayList<ArrayList<String>> arr = new ArrayList<>();
                     while ((choice = menuDonnee()) != 2) {
                         System.out.println("Rentrer un label");
-                        String label = input.next();
-
-                        ArrayList<ArrayList<String>> tmp = new ArrayList<>();
-
+                        ArrayList<String> tmp = new ArrayList<>();
+                        tmp.add(input.next());
                         while ((choice = menuDonneeTab()) != 2) {
                             System.out.println("Rentrer une donnée:");
-                            ArrayList<String> tmpn = new ArrayList<>();
-                            tmpn.add(input.next());
-                            tmp.add(tmpn);
+                            tmp.add(input.next());
                         }
-                        c.add(new Colonne(tmp, label));
+                        arr.add(tmp);
                     }
-                    d.setDataframes(c);
+                    d = new Dataframe(arr.toArray(new ArrayList[arr.size()]));
                     break;
             }
             while ((choice = menuSecondaire()) != 5) {
@@ -120,13 +115,13 @@ public class Pandas {
             }
 
         }
-
+                
     }
 
     public static int menuPrincipale() {
         int selection;
         Scanner input = new Scanner(System.in);
-        System.out.println("Choisir votre choix");
+        System.out.println("Choisissez");
         System.out.println("-------------------------\n");
         System.out.println("1 - Importer un CSV");
         System.out.println("2 - Rentrer manuellement les données");
@@ -138,7 +133,7 @@ public class Pandas {
     public static int menuDonnee() {
         int selection;
         Scanner input = new Scanner(System.in);
-        System.out.println("Choisir votre choix");
+        System.out.println("Choisissez");
         System.out.println("-------------------------\n");
         System.out.println("1 - Rentrer manuellement les données");
         System.out.println("2 - Fin");
@@ -149,7 +144,7 @@ public class Pandas {
     public static int menuDonneeTab() {
         int selection;
         Scanner input = new Scanner(System.in);
-        System.out.println("Choisir votre choix");
+        System.out.println("Choisissez");
         System.out.println("-------------------------\n");
         System.out.println("1 - Rentrer une donnée");
         System.out.println("2 - Fin");
@@ -160,7 +155,7 @@ public class Pandas {
     public static int menuSecondaire() {
         int selection;
         Scanner input = new Scanner(System.in);
-        System.out.println("Choisir votre choix");
+        System.out.println("Choisissez");
         System.out.println("-------------------------\n");
         System.out.println("1 - Afficher");
         System.out.println("2 - Sélectionner des données");
@@ -174,7 +169,7 @@ public class Pandas {
     public static int menu1() {
         int selection;
         Scanner input = new Scanner(System.in);
-        System.out.println("Choisir votre choix");
+        System.out.println("Choisissez");
         System.out.println("-------------------------\n");
         System.out.println("1 - Afficher dataframe");
         System.out.println("2 - Afficher les premieres lignes");
@@ -187,7 +182,7 @@ public class Pandas {
     public static int menu2() {
         int selection;
         Scanner input = new Scanner(System.in);
-        System.out.println("Choisir votre choix");
+        System.out.println("Choisissez");
         System.out.println("-------------------------\n");
         System.out.println("1 - Sélectionner des lignes");
         System.out.println("2 - Sélectionner des colonnes");
@@ -199,7 +194,7 @@ public class Pandas {
     public static int menu3() {
         int selection;
         Scanner input = new Scanner(System.in);
-        System.out.println("Choisir votre choix");
+        System.out.println("Choisissez");
         System.out.println("-------------------------\n");
         System.out.println("1 - Somme d'une colonne");
         System.out.println("2 - Minimum d'une colonne");
@@ -213,7 +208,7 @@ public class Pandas {
     public static int menu4() {
         int selection;
         Scanner input = new Scanner(System.in);
-        System.out.println("Choisir votre choix");
+        System.out.println("Choisissez");
         System.out.println("-------------------------\n");
         System.out.println("1 - Effectuer un group by");
         System.out.println("2 - Opération sur le group by");

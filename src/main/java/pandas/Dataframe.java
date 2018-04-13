@@ -64,7 +64,7 @@ public class Dataframe {
         }
         if (!b) {
             dataframes = null;
-            throw new ArgumentException();
+            throw new ArgumentException("");
         }
     }
 
@@ -102,7 +102,7 @@ public class Dataframe {
             }
             if (!b) {
                 dataframes = null;
-                throw new ArgumentException();
+                throw new ArgumentException("");
             }
         }
     }
@@ -268,9 +268,7 @@ public class Dataframe {
         if (i != -1 && (dataframes.get(i).getType() == 1 || dataframes.get(i).getType() == 2)) {
             return dataframes.get(i).mean();
         } else {
-            System.out.println("Impossible Mean !!");
-            throw new ArgumentException();
-            //return Double.NaN;
+            throw new ArgumentException("Impossible Mean !!");
         }
     }
 
@@ -279,9 +277,7 @@ public class Dataframe {
         if (i != -1 && (dataframes.get(i).getType() == 1 || dataframes.get(i).getType() == 2)) {
             return dataframes.get(i).sum();
         } else {
-            System.out.println("Impossible Sum !!");
-            throw new ArgumentException();
-            //return Double.NaN;
+            throw new ArgumentException("Impossible Sum !!");
         }
     }
 
@@ -290,9 +286,7 @@ public class Dataframe {
         if (i != -1 && (dataframes.get(i).getType() == 1 || dataframes.get(i).getType() == 2)) {
             return dataframes.get(i).min();
         } else {
-            System.out.println("Impossible min !!");
-            throw new ArgumentException();
-            //return Double.NaN;
+            throw new ArgumentException("Impossible min !!");
         }
     }
 
@@ -301,9 +295,7 @@ public class Dataframe {
         if (i != -1 && (dataframes.get(i).getType() == 1 || dataframes.get(i).getType() == 2)) {
             return dataframes.get(i).max();
         } else {
-            System.out.println("Impossible Max !!");
-            throw new ArgumentException();
-            //return Double.NaN;
+            throw new ArgumentException("Impossible Max !!");
         }
     }
 
@@ -390,12 +382,10 @@ public class Dataframe {
                     }
                 }
             } else {
-                System.out.println("Erreur de group by");
-                throw new ArgumentException();
+                throw new ArgumentException("Erreur de group by");
             }
         } else {
-            System.out.println("Dataframe vide");
-            throw new EmptyDataException();
+            throw new EmptyDataException("Dataframe vide");
         }
         return data;
     }
@@ -436,8 +426,7 @@ public class Dataframe {
                             res = CalculatorArray.mean(d.getDataframes().get(i).getTab().get(j));
                             break;
                         default:
-                            System.out.println("Erreur Opération !!");
-                            throw new OperationException();
+                            throw new OperationException("Erreur Opération !!");
                     }
 
                     d.getDataframes().get(i).getTab().remove(j);
@@ -448,8 +437,7 @@ public class Dataframe {
                 d.getDataframes().get(i).setType(2);
 
             } else {
-                System.out.println("Impossible Opération !!");
-                throw new TypeOrIndexException();
+                throw new TypeOrIndexException("Impossible Opération !!");
             }
         }
         return d;

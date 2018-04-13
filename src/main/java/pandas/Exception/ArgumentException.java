@@ -11,7 +11,8 @@ package pandas.Exception;
  */
 public class ArgumentException extends RuntimeException {
 
-    public ArgumentException() {
+    public ArgumentException(String s) {
+        super(s);
     }
     
 }

@@ -11,7 +11,8 @@ package pandas.Exception;
  */
 public class TypeOrIndexException extends RuntimeException {
 
-    public TypeOrIndexException() {
+    public TypeOrIndexException(String s) {
+        super(s);
     }
     
 }
