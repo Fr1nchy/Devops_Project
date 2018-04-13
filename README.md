@@ -10,18 +10,18 @@
 • verify :  Lance les tests pour verifier la qualité du package</br>
 • install :  Installe le package dans le dépôt local</br>
 • deploy : Copie le package final dans un dépôt distant pour le
-  partager
+  partager</br>
   
   
-Pour executer :
-• execution jacoco : mvn clean jacoco:prepare-agent install jacoco:report
-• execution test junit: mvn test 
-• execution site junit: mvn clean jacoco:prepare-agent install jacoco:report ; mvn site
+Pour executer :</br>
+• execution jacoco : mvn clean jacoco:prepare-agent install jacoco:report</br>
+• execution test junit: mvn test </br>
+• execution site junit: mvn clean jacoco:prepare-agent install jacoco:report ; mvn site</br>
 
 
 
-Amélioration possible :
-• Utiliser des hashtables
-• Utiliser des types Comparables
-• Ajouter des d'autres opérations (count,cumsum,...)
+Amélioration possible : </br>
+• Utiliser des hashtables </br>
+• Utiliser des types Comparables </br>
+• Ajouter des d'autres opérations (count,cumsum,...) </br>
 
