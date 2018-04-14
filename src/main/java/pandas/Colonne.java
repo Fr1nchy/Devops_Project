@@ -13,12 +13,21 @@ public class Colonne {
     private String label;
     private Integer type;
 
+    /*
+    * Création d'une colonne à partir d'un tableau de tableau
+    * @param un tableau de tableau et un label du dataframe
+     */
     public Colonne(ArrayList<ArrayList<String>> tab, String label) {
         this.type = typeDef(tab);
         this.tab = new ArrayList<ArrayList<String>>(tab);
         this.label = label;
     }
 
+    /*
+    * Max d'une colonne
+    * @param un label du Dataframe
+    * @return double resultat du max
+     */
     public double max() {
         double resultat = 0;
         double tmp = 0;
@@ -33,6 +42,11 @@ public class Colonne {
         return resultat;
     }
 
+    /*
+    * Min d'une colonne
+    * @param un label du Dataframe
+    * @return double resultat du min
+     */
     public double min() {
         double resultat = Double.MAX_VALUE;
         double tmp = 0;
@@ -47,6 +61,11 @@ public class Colonne {
         return resultat;
     }
 
+    /*
+    * Somme d'une colonne
+    * @param un label du Dataframe
+    * @return double resultat de la somme
+     */
     public double sum() {
         double resultat = 0;
         for (int i = 0; i < tab.size(); i++) {
@@ -56,6 +75,11 @@ public class Colonne {
         return resultat;
     }
 
+    /*
+    * Moyenne d'une colonne
+    * @param un label du Dataframe
+    * @return double resultat de la moyenne
+     */
     public double mean() {
         double resultat = 0;
         for (int i = 0; i < tab.size(); i++) {
@@ -68,6 +92,11 @@ public class Colonne {
         return resultat;
     }
 
+    /*
+    * Définit le type du collectionneur
+    * @param un ArrayList d'un ArrayList de string
+    * @return int le type du tableau
+     */
     private int typeDef(ArrayList<ArrayList<String>> col) {
         int max = -1;
         int typetmp = 0;

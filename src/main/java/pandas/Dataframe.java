@@ -9,6 +9,10 @@ import pandas.Exception.EmptyDataException;
 import pandas.Exception.OperationException;
 import pandas.Exception.TypeOrIndexException;
 
+/*
+ * @author JPandas
+ * @version 1.0
+ */
 public class Dataframe {
 
     private ArrayList<Colonne> dataframes;
@@ -17,7 +21,11 @@ public class Dataframe {
     public final int MAX = 2;
     public final int MEAN = 3;
 
-    //Creation d'une dataFrame avec un CSV
+    /*
+    * Création d'une dataFrame avec un CSV
+    * @param un nom de fichier de type csv
+    * @return Dataframe correspondant au csv
+     */
     public Dataframe(String nomFichier) {
 
         dataframes = new ArrayList<>();
@@ -68,7 +76,11 @@ public class Dataframe {
         }
     }
 
-    //Creation d'une dataFrame avec une collection
+    /*
+    * Création d'une dataFrame avec une collection
+    * @param un ensemble de colonne
+    * @return Dataframe correspondant au colonne
+     */
     public Dataframe(ArrayList<String>... values) {
         dataframes = new ArrayList<>();
 
@@ -107,7 +119,11 @@ public class Dataframe {
         }
     }
 
-    //Creation d'une dataFrame avec un sous-ensemble de lignes à partir de leur index
+    /*
+    * Création d'une dataFrame avec un sous-ensemble de lignes à partir de leur index
+    * @param un ou pleusieurs indice de ligne
+    * @return Dataframe correspondant au ligne
+     */
     public Dataframe selectDataLigne(Integer... index) {
         Dataframe data = null;
         if (dataframes != null && !dataframes.isEmpty()) {
@@ -142,7 +158,11 @@ public class Dataframe {
         return data;
     }
 
-//Creation d'une dataFrame avec un sous-ensemble de colonnes en utilisant les labels
+    /*
+    * Création d'une dataFrame avec un sous-ensemble de colonnes en utilisant les labels
+    * @param un ou pleusieurs labels
+    * @return Dataframe correspondant au label
+     */
     public Dataframe selectDataColonne(String... label) {
         Dataframe data = null;
         if (dataframes != null && !dataframes.isEmpty()) {
@@ -176,6 +196,10 @@ public class Dataframe {
         return data;
     }
 
+    /*
+    * Ecrit l'entête du Dataframe (les labels) 
+    * @return string correspond à l'entête du Dataframe
+     */
     private String showLabel() {
         String res = "";
         for (int i = 0; i < dataframes.size(); i++) {
@@ -187,6 +211,9 @@ public class Dataframe {
         return res;
     }
 
+    /*
+    * Affichage du Dataframe
+     */
     public String afficherDataframe() {
         String res = "Dataframe:\n";
         //System.out.println("Dataframe:");
@@ -206,6 +233,9 @@ public class Dataframe {
         return res;
     }
 
+    /*
+    * Affichage du Dataframe uniquement les premières lignes
+     */
     public String afficherPremieresLignes() {
         String res = "Dataframe premiere ligne:\n";
         //System.out.println("Dataframe premiere ligne:");
@@ -230,6 +260,9 @@ public class Dataframe {
         return res;
     }
 
+    /*
+    * Affichage du Dataframe uniquement les dernières lignes
+     */
     public String afficherDernieresLignes() {
         String res = "Dataframe derniere ligne:\n";
         //System.out.println("Dataframe derniere ligne:");
@@ -249,6 +282,11 @@ public class Dataframe {
         return res;
     }
 
+    /*
+    * Renvoie index correspondant au label
+    * @param un label du Dataframe
+    * @return indice du label
+     */
     private int indexLabel(String label) {
         if (dataframes != null && !dataframes.isEmpty()) {
             int i = 0;
@@ -262,7 +300,12 @@ public class Dataframe {
         return -1;
     }
 
-    //Statistiques de base sur les colonnes -> sbc
+    /*
+    * Moyenne d'une colonne
+    * @param un label du Dataframe
+    * @return double resultat de la moyenne
+    * @throws erreur de label
+     */
     public double meanCol(String label) {
         int i = indexLabel(label);
         if (i != -1 && (dataframes.get(i).getType() == 1 || dataframes.get(i).getType() == 2)) {
@@ -272,6 +315,12 @@ public class Dataframe {
         }
     }
 
+    /*
+    * Somme d'une colonne
+    * @param un label du Dataframe
+    * @return double resultat de la somme
+    * @throws erreur de label
+     */
     public double sumCol(String label) {
         int i = indexLabel(label);
         if (i != -1 && (dataframes.get(i).getType() == 1 || dataframes.get(i).getType() == 2)) {
@@ -281,6 +330,12 @@ public class Dataframe {
         }
     }
 
+    /*
+    * Minimum d'une colonne
+    * @param un label du Dataframe
+    * @return double resultat du minimum
+    * @throws erreur de label
+     */
     public double minCol(String label) {
         int i = indexLabel(label);
         if (i != -1 && (dataframes.get(i).getType() == 1 || dataframes.get(i).getType() == 2)) {
@@ -290,6 +345,12 @@ public class Dataframe {
         }
     }
 
+    /*
+    * Maximum d'une colonne
+    * @param un label du Dataframe
+    * @return double resultat du maximum
+    * @throws erreur de label
+     */
     public double maxCol(String label) {
         int i = indexLabel(label);
         if (i != -1 && (dataframes.get(i).getType() == 1 || dataframes.get(i).getType() == 2)) {
@@ -321,6 +382,12 @@ public class Dataframe {
         return data;
     }
 
+    /*
+    * group by un Dataframe
+    * @param un ou plusieurs labels du Dataframe
+    * @return un Dataframe
+    * @throws erreur de datafrme ou de label
+     */
     public Dataframe groupby(String... label) {
         Dataframe data = this.clone();
 
@@ -390,6 +457,11 @@ public class Dataframe {
         return data;
     }
 
+    /*
+    * Vérifie si deux tableaux sont identiques
+    * @param deux ArrayList de type string
+    * @return boolean
+     */
     private boolean tabEquals(ArrayList<String> a, ArrayList<String> b) {
         if (a.size() == b.size()) {
             int i = 0;
@@ -404,6 +476,12 @@ public class Dataframe {
         return false;
     }
 
+    /*
+    * Opération sur le group by
+    * @param un label du Dataframe et une opération 
+    * @return nouveau Dataframe
+    * @throws erreur de label ou d'opération
+     */
     public Dataframe groupbyOperation(String label, int op) {
         Dataframe d = this.clone();
         if (d != null && !d.getDataframes().isEmpty()) {
