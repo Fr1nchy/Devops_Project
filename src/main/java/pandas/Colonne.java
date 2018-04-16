@@ -14,8 +14,8 @@ public class Colonne {
     private Integer type;
 
     /*
-    * Création d'une colonne à partir d'un tableau de tableau
-    * @param un tableau de tableau et un label du dataframe
+    * Création d'une colonne à partir d'un tableau de tableaux
+    * @param un tableau de tableaux et un label du dataframe
      */
     public Colonne(ArrayList<ArrayList<String>> tab, String label) {
         this.type = typeDef(tab);
@@ -94,7 +94,7 @@ public class Colonne {
 
     /*
     * Définit le type du collectionneur
-    * @param un ArrayList d'un ArrayList de string
+    * @param un ArrayList d'un ArrayList de strings
     * @return int le type du tableau
      */
     private int typeDef(ArrayList<ArrayList<String>> col) {
