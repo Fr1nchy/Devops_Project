@@ -78,8 +78,8 @@ public class Dataframe {
 
     /*
     * Création d'une dataFrame avec une collection
-    * @param un ensemble de colonne
-    * @return Dataframe correspondant au colonne
+    * @param un ensemble de colonnes
+    * @return Dataframe correspondant aux colonnes
      */
     public Dataframe(ArrayList<String>... values) {
         dataframes = new ArrayList<>();
@@ -121,8 +121,8 @@ public class Dataframe {
 
     /*
     * Création d'une dataFrame avec un sous-ensemble de lignes à partir de leur index
-    * @param un ou pleusieurs indice de ligne
-    * @return Dataframe correspondant au ligne
+    * @param un ou pleusieurs indices de ligne
+    * @return Dataframe correspondant aux lignes
      */
     public Dataframe selectDataLigne(Integer... index) {
         Dataframe data = null;
@@ -386,7 +386,7 @@ public class Dataframe {
     * group by un Dataframe
     * @param un ou plusieurs labels du Dataframe
     * @return un Dataframe
-    * @throws erreur de datafrme ou de label
+    * @throws erreur de dataframe ou de label
      */
     public Dataframe groupby(String... label) {
         Dataframe data = this.clone();
@@ -426,7 +426,7 @@ public class Dataframe {
                     }
                 }
 
-                //Algo distinc deux boucle
+                //Algo distinct deux boucles
                 for (int i = 0; i < eq.size(); i++) {
                     for (int j = 0; j < eq.size(); j++) {
                         if ((i != j) && (tabEquals(eq.get(i), eq.get(j)))) {
