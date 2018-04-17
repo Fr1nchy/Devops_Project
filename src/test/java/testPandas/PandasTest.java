@@ -1,4 +1,4 @@
-package testPandas;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,6 +7,7 @@ package testPandas;
  */
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import pandas.Dataframe;
@@ -29,7 +30,7 @@ public class PandasTest {
     @Test(timeout = 100)
     public void testCSVChampVide() {
         d = new Dataframe("");
-        assertTrue(d.getDataframes() == null);
+        assertNull(d.getDataframes());
     }
 
     @Test(expected = ArgumentException.class)
@@ -95,33 +96,33 @@ public class PandasTest {
         assertTrue(d.getDataframes().get(0).getTab().get(0).size() == 1);
         assertTrue(d.getDataframes().get(0).getTab().get(1).size() == 1);
         assertTrue(d.getDataframes().get(0).getTab().get(2).size() == 1);
-        assertEquals(d.getDataframes().get(0).getTab().get(0).get(0), "Bob");
-        assertEquals(d.getDataframes().get(0).getTab().get(1).get(0), "Jane");
-        assertEquals(d.getDataframes().get(0).getTab().get(2).get(0), "Pete");
+        assertEquals("Bob",d.getDataframes().get(0).getTab().get(0).get(0));
+        assertEquals("Jane",d.getDataframes().get(0).getTab().get(1).get(0));
+        assertEquals("Pete",d.getDataframes().get(0).getTab().get(2).get(0) );
         //Colonne 2
         assertTrue(d.getDataframes().get(1).getTab().size() == 3);
         assertTrue(d.getDataframes().get(1).getTab().get(0).size() == 1);
         assertTrue(d.getDataframes().get(1).getTab().get(1).size() == 1);
         assertTrue(d.getDataframes().get(1).getTab().get(2).size() == 1);
-        assertEquals(d.getDataframes().get(1).getTab().get(0).get(0), "Smith");
-        assertEquals(d.getDataframes().get(1).getTab().get(1).get(0), "Wilson");
-        assertEquals(d.getDataframes().get(1).getTab().get(2).get(0), "Von Burg");
+        assertEquals("Smith",d.getDataframes().get(1).getTab().get(0).get(0));
+        assertEquals("Wilson",d.getDataframes().get(1).getTab().get(1).get(0) );
+        assertEquals("Von Burg",d.getDataframes().get(1).getTab().get(2).get(0));
         //Colonne 3
         assertTrue(d.getDataframes().get(2).getTab().size() == 3);
         assertTrue(d.getDataframes().get(2).getTab().get(0).size() == 1);
         assertTrue(d.getDataframes().get(2).getTab().get(1).size() == 1);
         assertTrue(d.getDataframes().get(2).getTab().get(2).size() == 1);
-        assertEquals(d.getDataframes().get(2).getTab().get(0).get(0), "bob@mywebsite.com");
-        assertEquals(d.getDataframes().get(2).getTab().get(1).get(0), "jane@example.com");
-        assertEquals(d.getDataframes().get(2).getTab().get(2).get(0), "pete@example.com");
+        assertEquals( "bob@mywebsite.com",d.getDataframes().get(2).getTab().get(0).get(0));
+        assertEquals("jane@example.com",d.getDataframes().get(2).getTab().get(1).get(0));
+        assertEquals("pete@example.com",d.getDataframes().get(2).getTab().get(2).get(0));
         //Colonne 4
         assertTrue(d.getDataframes().get(3).getTab().size() == 3);
         assertTrue(d.getDataframes().get(3).getTab().get(0).size() == 1);
         assertTrue(d.getDataframes().get(3).getTab().get(1).size() == 1);
         assertTrue(d.getDataframes().get(3).getTab().get(2).size() == 1);
-        assertEquals(d.getDataframes().get(3).getTab().get(0).get(0), "34");
-        assertEquals(d.getDataframes().get(3).getTab().get(1).get(0), "21");
-        assertEquals(d.getDataframes().get(3).getTab().get(2).get(0), "44");
+        assertEquals("34",d.getDataframes().get(3).getTab().get(0).get(0));
+        assertEquals("21",d.getDataframes().get(3).getTab().get(1).get(0));
+        assertEquals("44",d.getDataframes().get(3).getTab().get(2).get(0));
 
     }
 
@@ -209,33 +210,33 @@ public class PandasTest {
         assertTrue(d.getDataframes().get(0).getTab().get(0).size() == 1);
         assertTrue(d.getDataframes().get(0).getTab().get(1).size() == 1);
         assertTrue(d.getDataframes().get(0).getTab().get(2).size() == 1);
-        assertEquals(d.getDataframes().get(0).getTab().get(0).get(0), "true");
-        assertEquals(d.getDataframes().get(0).getTab().get(1).get(0), "false");
-        assertEquals(d.getDataframes().get(0).getTab().get(2).get(0), "true");
+        assertEquals("true",d.getDataframes().get(0).getTab().get(0).get(0));
+        assertEquals("false",d.getDataframes().get(0).getTab().get(1).get(0));
+        assertEquals("true",d.getDataframes().get(0).getTab().get(2).get(0));
         //Colonne 2
         assertTrue(d.getDataframes().get(1).getTab().size() == 3);
         assertTrue(d.getDataframes().get(1).getTab().get(0).size() == 1);
         assertTrue(d.getDataframes().get(1).getTab().get(1).size() == 1);
         assertTrue(d.getDataframes().get(1).getTab().get(2).size() == 1);
-        assertEquals(d.getDataframes().get(1).getTab().get(0).get(0), "0");
-        assertEquals(d.getDataframes().get(1).getTab().get(1).get(0), "1");
-        assertEquals(d.getDataframes().get(1).getTab().get(2).get(0), "2");
+        assertEquals("0",d.getDataframes().get(1).getTab().get(0).get(0));
+        assertEquals("1",d.getDataframes().get(1).getTab().get(1).get(0));
+        assertEquals("2",d.getDataframes().get(1).getTab().get(2).get(0));
         //Colonne 3
         assertTrue(d.getDataframes().get(2).getTab().size() == 3);
         assertTrue(d.getDataframes().get(2).getTab().get(0).size() == 1);
         assertTrue(d.getDataframes().get(2).getTab().get(1).size() == 1);
         assertTrue(d.getDataframes().get(2).getTab().get(2).size() == 1);
-        assertEquals(d.getDataframes().get(2).getTab().get(0).get(0), "0.1");
-        assertEquals(d.getDataframes().get(2).getTab().get(1).get(0), "1.894");
-        assertEquals(d.getDataframes().get(2).getTab().get(2).get(0), "2");
+        assertEquals( "0.1",d.getDataframes().get(2).getTab().get(0).get(0));
+        assertEquals("1.894",d.getDataframes().get(2).getTab().get(1).get(0));
+        assertEquals("2",d.getDataframes().get(2).getTab().get(2).get(0));
         //Colonne 4
         assertTrue(d.getDataframes().get(3).getTab().size() == 3);
         assertTrue(d.getDataframes().get(3).getTab().get(0).size() == 1);
         assertTrue(d.getDataframes().get(3).getTab().get(1).size() == 1);
         assertTrue(d.getDataframes().get(3).getTab().get(2).size() == 1);
-        assertEquals(d.getDataframes().get(3).getTab().get(0).get(0), "10");
-        assertEquals(d.getDataframes().get(3).getTab().get(1).get(0), "boolean");
-        assertEquals(d.getDataframes().get(3).getTab().get(2).get(0), "2.1485");
+        assertEquals("10",d.getDataframes().get(3).getTab().get(0).get(0));
+        assertEquals("boolean",d.getDataframes().get(3).getTab().get(1).get(0));
+        assertEquals("2.1485",d.getDataframes().get(3).getTab().get(2).get(0));
     }
 
     @Test(expected = ArgumentException.class)
@@ -296,7 +297,7 @@ public class PandasTest {
         //Securité vide dataframe
         d = new Dataframe();
         d2 = d.selectDataLigne(0);
-        assertTrue(d2 == null);
+        assertNull(d2);
     }
 
     @Test(timeout = 100)
@@ -342,19 +343,19 @@ public class PandasTest {
         //Colonne 1
         assertTrue(d2.getDataframes().get(0).getTab().size() == 1);
         assertTrue(d2.getDataframes().get(0).getTab().get(0).size() == 1);
-        assertEquals(d2.getDataframes().get(0).getTab().get(0).get(0), "Bob");
+        assertEquals("Bob",d2.getDataframes().get(0).getTab().get(0).get(0));
         //Colonne 2
         assertTrue(d2.getDataframes().get(1).getTab().size() == 1);
         assertTrue(d2.getDataframes().get(1).getTab().get(0).size() == 1);
-        assertEquals(d2.getDataframes().get(1).getTab().get(0).get(0), "Smith");
+        assertEquals("Smith",d2.getDataframes().get(1).getTab().get(0).get(0));
         //Colonne 3
         assertTrue(d2.getDataframes().get(2).getTab().size() == 1);
         assertTrue(d2.getDataframes().get(2).getTab().get(0).size() == 1);
-        assertEquals(d2.getDataframes().get(2).getTab().get(0).get(0), "bob@mywebsite.com");
+        assertEquals("bob@mywebsite.com",d2.getDataframes().get(2).getTab().get(0).get(0));
         //Colonne 4
         assertTrue(d2.getDataframes().get(3).getTab().size() == 1);
         assertTrue(d2.getDataframes().get(3).getTab().get(0).size() == 1);
-        assertEquals(d2.getDataframes().get(3).getTab().get(0).get(0), "34");
+        assertEquals("34",d2.getDataframes().get(3).getTab().get(0).get(0));
 
     }
 
@@ -379,26 +380,26 @@ public class PandasTest {
         assertTrue(d2.getDataframes().get(0).getTab().size() == 2);
         assertTrue(d2.getDataframes().get(0).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(0).getTab().get(1).size() == 1);
-        assertEquals(d2.getDataframes().get(0).getTab().get(0).get(0), "Bob");
-        assertEquals(d2.getDataframes().get(0).getTab().get(1).get(0), "Jane");
+        assertEquals("Bob",d2.getDataframes().get(0).getTab().get(0).get(0) );
+        assertEquals( "Jane",d2.getDataframes().get(0).getTab().get(1).get(0));
         //Colonne 2
         assertTrue(d2.getDataframes().get(1).getTab().size() == 2);
         assertTrue(d2.getDataframes().get(1).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(1).getTab().get(1).size() == 1);
-        assertEquals(d2.getDataframes().get(1).getTab().get(0).get(0), "Smith");
-        assertEquals(d2.getDataframes().get(1).getTab().get(1).get(0), "Wilson");
+        assertEquals("Smith",d2.getDataframes().get(1).getTab().get(0).get(0));
+        assertEquals("Wilson",d2.getDataframes().get(1).getTab().get(1).get(0));
         //Colonne 3
         assertTrue(d2.getDataframes().get(2).getTab().size() == 2);
         assertTrue(d2.getDataframes().get(2).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(2).getTab().get(1).size() == 1);
-        assertEquals(d2.getDataframes().get(2).getTab().get(0).get(0), "bob@mywebsite.com");
-        assertEquals(d2.getDataframes().get(2).getTab().get(1).get(0), "jane@example.com");
+        assertEquals("bob@mywebsite.com",d2.getDataframes().get(2).getTab().get(0).get(0));
+        assertEquals("jane@example.com",d2.getDataframes().get(2).getTab().get(1).get(0));
         //Colonne 4
         assertTrue(d2.getDataframes().get(3).getTab().size() == 2);
         assertTrue(d2.getDataframes().get(3).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(3).getTab().get(1).size() == 1);
-        assertEquals(d2.getDataframes().get(3).getTab().get(0).get(0), "34");
-        assertEquals(d2.getDataframes().get(3).getTab().get(1).get(0), "21");
+        assertEquals("34",d2.getDataframes().get(3).getTab().get(0).get(0));
+        assertEquals("21",d2.getDataframes().get(3).getTab().get(1).get(0));
     }
 
     @Test(timeout = 100)
@@ -407,7 +408,7 @@ public class PandasTest {
         //Sécurité vide dataframe
         d = new Dataframe();
         d2 = d.selectDataColonne("First Name");
-        assertTrue(d2 == null);
+        assertNull(d2);
     }
 
     @Test(timeout = 100)
@@ -434,9 +435,9 @@ public class PandasTest {
         assertTrue(d2.getDataframes().get(0).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(0).getTab().get(1).size() == 1);
         assertTrue(d2.getDataframes().get(0).getTab().get(2).size() == 1);
-        assertEquals(d2.getDataframes().get(0).getTab().get(0).get(0), "Bob");
-        assertEquals(d2.getDataframes().get(0).getTab().get(1).get(0), "Jane");
-        assertEquals(d2.getDataframes().get(0).getTab().get(2).get(0), "Pete");
+        assertEquals("Bob",d2.getDataframes().get(0).getTab().get(0).get(0));
+        assertEquals("Jane",d2.getDataframes().get(0).getTab().get(1).get(0));
+        assertEquals( "Pete",d2.getDataframes().get(0).getTab().get(2).get(0));
     }
 
     @Test(timeout = 100)
@@ -457,17 +458,17 @@ public class PandasTest {
         assertTrue(d2.getDataframes().get(0).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(0).getTab().get(1).size() == 1);
         assertTrue(d2.getDataframes().get(0).getTab().get(2).size() == 1);
-        assertEquals(d2.getDataframes().get(0).getTab().get(0).get(0), "Bob");
-        assertEquals(d2.getDataframes().get(0).getTab().get(1).get(0), "Jane");
-        assertEquals(d2.getDataframes().get(0).getTab().get(2).get(0), "Pete");
+        assertEquals("Bob",d2.getDataframes().get(0).getTab().get(0).get(0));
+        assertEquals( "Jane",d2.getDataframes().get(0).getTab().get(1).get(0));
+        assertEquals( "Pete",d2.getDataframes().get(0).getTab().get(2).get(0));
         //Colonne 2
         assertTrue(d2.getDataframes().get(1).getTab().size() == 3);
         assertTrue(d2.getDataframes().get(1).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(1).getTab().get(1).size() == 1);
         assertTrue(d2.getDataframes().get(1).getTab().get(2).size() == 1);
-        assertEquals(d2.getDataframes().get(1).getTab().get(0).get(0), "34");
-        assertEquals(d2.getDataframes().get(1).getTab().get(1).get(0), "21");
-        assertEquals(d2.getDataframes().get(1).getTab().get(2).get(0), "44");
+        assertEquals( "34",d2.getDataframes().get(1).getTab().get(0).get(0));
+        assertEquals( "21",d2.getDataframes().get(1).getTab().get(1).get(0));
+        assertEquals("44",d2.getDataframes().get(1).getTab().get(2).get(0));
 
     }
 
@@ -487,7 +488,7 @@ public class PandasTest {
             a.add("0");
         }
         d = new Dataframe(a);
-        assertEquals(d.meanCol("test"), 0, 0.0);
+        assertEquals(0,d.meanCol("test"), 0.0);
     }
 
     @Test(expected = ArgumentException.class)
@@ -503,7 +504,7 @@ public class PandasTest {
         //Fonctionnement normal
         ArrayList<String> a = addAuto(1);
         d = new Dataframe(a);
-        assertEquals(d.meanCol("Int"), 1, 0.0);
+        assertEquals(1,d.meanCol("Int"), 0.0);
     }
 
     @Test(expected = ArgumentException.class)
@@ -527,7 +528,7 @@ public class PandasTest {
         //Fonctionnement normal
         ArrayList<String> a = addAuto(1);
         d = new Dataframe(a);
-        assertEquals(d.minCol("Int"), 0, 0.0);
+        assertEquals(0,d.minCol("Int"), 0.0);
     }
 
     @Test(expected = ArgumentException.class)
@@ -559,7 +560,7 @@ public class PandasTest {
         //Fonctionnement normal
         ArrayList<String> a = addAuto(1);
         d = new Dataframe(a);
-        assertEquals(d.maxCol("Int"), 2, 0.0);
+        assertEquals(2,d.maxCol("Int"), 0.0);
     }
 
     @Test(timeout = 100)
@@ -567,7 +568,7 @@ public class PandasTest {
         //Fonctionnement normal
         ArrayList<String> a = addAuto(2);
         d = new Dataframe(a);
-        assertEquals(d.maxCol("Float"), 2, 0.0);
+        assertEquals(2,d.maxCol("Float"), 0.0);
     }
 
     @Test(expected = ArgumentException.class)
@@ -591,7 +592,7 @@ public class PandasTest {
         //Fonctionnement normal
         ArrayList<String> a = addAuto(1);
         d = new Dataframe(a);
-        assertEquals(d.sumCol("Int"), 3, 0.0);
+        assertEquals(3,d.sumCol("Int"), 0.0);
     }
 
     @Test(expected = EmptyDataException.class)
@@ -663,17 +664,17 @@ public class PandasTest {
         //Colonne 2
         assertTrue(d2.getDataframes().get(1).getTab().size() == 1);
         assertTrue(d2.getDataframes().get(1).getTab().get(0).size() == 2);
-        assertEquals(d2.getDataframes().get(1).getTab().get(0).get(0), "1.25");
-        assertEquals(d2.getDataframes().get(1).getTab().get(0).get(1), "4");
+        assertEquals("1.25",d2.getDataframes().get(1).getTab().get(0).get(0));
+        assertEquals("4",d2.getDataframes().get(1).getTab().get(0).get(1));
 
         /**
          * **********************
          * Test des min max sum mean colonne
          */
-        assertEquals(d2.maxCol("float"), 4, 0.0);
-        assertEquals(d2.minCol("float"), 1.25, 0.0);
-        assertEquals(d2.meanCol("float"), 2.625, 0.0);
-        assertEquals(d2.sumCol("float"), 5.25, 0.0);
+        assertEquals(4,d2.maxCol("float"),  0.0);
+        assertEquals(1.25,d2.minCol("float"), 0.0);
+        assertEquals(2.625,d2.meanCol("float"), 0.0);
+        assertEquals(5.25,d2.sumCol("float"), 0.0);
     }
 
     @Test(timeout = 100)
@@ -698,11 +699,11 @@ public class PandasTest {
         //Colonne 1
         assertTrue(d2.getDataframes().get(0).getTab().size() == 1);
         assertTrue(d2.getDataframes().get(0).getTab().get(0).size() == 1);
-        assertEquals(d2.getDataframes().get(0).getTab().get(0).get(0), "1");
+        assertEquals("1",d2.getDataframes().get(0).getTab().get(0).get(0));
         //Colonne 2
         assertTrue(d2.getDataframes().get(1).getTab().size() == 1);
         assertTrue(d2.getDataframes().get(1).getTab().get(0).size() == 1);
-        assertEquals(d2.getDataframes().get(1).getTab().get(0).get(0), "1.25");
+        assertEquals("1.25",d2.getDataframes().get(1).getTab().get(0).get(0));
     }
 
     @Test(timeout = 100)
@@ -710,7 +711,7 @@ public class PandasTest {
         //vide
         d = new Dataframe();
         Dataframe d2 = d.groupbyOperation("azerty", d.MAX);
-        assertTrue(d2 == null);
+        assertNull(d2 );
     }
 
     @Test(expected = TypeOrIndexException.class)
@@ -798,34 +799,34 @@ public class PandasTest {
         assertTrue(d2.getDataframes().get(0).getTab().size() == 2);
         assertTrue(d2.getDataframes().get(0).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(0).getTab().get(1).size() == 1);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(0).getTab().get(0).get(0)), 1, 0.0);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(0).getTab().get(1).get(0)), 2, 0.0);
+        assertEquals(1,Double.parseDouble(d2.getDataframes().get(0).getTab().get(0).get(0)),  0.0);
+        assertEquals(2,Double.parseDouble(d2.getDataframes().get(0).getTab().get(1).get(0)),  0.0);
 
         //Colonne 2 SUM
         assertTrue(d2.getDataframes().get(1).getTab().size() == 2);
         assertTrue(d2.getDataframes().get(1).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(1).getTab().get(1).size() == 1);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(1).getTab().get(0).get(0)), 1, 0.0);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(1).getTab().get(1).get(0)), 5, 0.0);
+        assertEquals(1,Double.parseDouble(d2.getDataframes().get(1).getTab().get(0).get(0)),  0.0);
+        assertEquals(5,Double.parseDouble(d2.getDataframes().get(1).getTab().get(1).get(0)), 0.0);
         //Colonne 3 min
         assertTrue(d2.getDataframes().get(2).getTab().size() == 2);
         assertTrue(d2.getDataframes().get(2).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(2).getTab().get(1).size() == 1);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(2).getTab().get(0).get(0)), 4, 0.0);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(2).getTab().get(1).get(0)), 6, 0.0);
+        assertEquals(4,Double.parseDouble(d2.getDataframes().get(2).getTab().get(0).get(0)), 0.0);
+        assertEquals(6,Double.parseDouble(d2.getDataframes().get(2).getTab().get(1).get(0)), 0.0);
         //Colonne 4 max
         assertTrue(d2.getDataframes().get(3).getTab().size() == 2);
         assertTrue(d2.getDataframes().get(3).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(3).getTab().get(1).size() == 1);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(3).getTab().get(0).get(0)), 9, 0.0);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(3).getTab().get(1).get(0)), 11, 0.0);
+        assertEquals(9,Double.parseDouble(d2.getDataframes().get(3).getTab().get(0).get(0)),  0.0);
+        assertEquals(11,Double.parseDouble(d2.getDataframes().get(3).getTab().get(1).get(0)),  0.0);
 
         //Colonne 5  mean
         assertTrue(d2.getDataframes().get(4).getTab().size() == 2);
         assertTrue(d2.getDataframes().get(4).getTab().get(0).size() == 1);
         assertTrue(d2.getDataframes().get(4).getTab().get(1).size() == 1);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(4).getTab().get(0).get(0)), 12.5, 0.0);
-        assertEquals(Double.parseDouble(d2.getDataframes().get(4).getTab().get(1).get(0)), 14.5, 0.0);
+        assertEquals(12.5,Double.parseDouble(d2.getDataframes().get(4).getTab().get(0).get(0)), 0.0);
+        assertEquals(14.5,Double.parseDouble(d2.getDataframes().get(4).getTab().get(1).get(0)), 0.0);
     }
 
     @Test(expected = TypeOrIndexException.class)
@@ -869,9 +870,9 @@ public class PandasTest {
         d.getDataframes().get(0).setTab(b);
         assertTrue(d.getDataframes().size() == 1);
         assertTrue(d.getDataframes().get(0).getType() == 1);
-        assertEquals(d.getDataframes().get(0).getLabel(), "g");
+        assertEquals("g",d.getDataframes().get(0).getLabel());
         assertTrue(d.getDataframes().get(0).getTab().get(0).size() == 1);
-        assertEquals(d.getDataframes().get(0).getTab().get(0).get(0), "1");
+        assertEquals("1",d.getDataframes().get(0).getTab().get(0).get(0));
 
     }
 
@@ -879,7 +880,7 @@ public class PandasTest {
     public void afficherDataframeVide() {
         d = new Dataframe();
         assertTrue(d.getDataframes().isEmpty());
-        assertEquals(d.afficherDataframe(), "Dataframe:\n");
+        assertEquals("Dataframe:\n",d.afficherDataframe());
     }
 
     @Test(timeout = 100)
@@ -889,14 +890,14 @@ public class PandasTest {
         a.add("1");
         d = new Dataframe(a);
         String tmp = d.afficherDataframe().replaceAll(" ", "").replaceAll("\n", "");
-        assertEquals(tmp, "Dataframe:g[1]");
+        assertEquals("Dataframe:g[1]",tmp);
     }
 
     @Test(timeout = 100)
     public void afficherPremieresLignesVide() {
         d = new Dataframe();
         assertTrue(d.getDataframes().isEmpty());
-        assertEquals(d.afficherPremieresLignes(), "Dataframe premiere ligne:\n");
+        assertEquals("Dataframe premiere ligne:\n",d.afficherPremieresLignes());
     }
 
     @Test(timeout = 100)
@@ -908,7 +909,7 @@ public class PandasTest {
         a.add("3");
         d = new Dataframe(a);
         String tmp = d.afficherPremieresLignes().replaceAll(" ", "").replaceAll("\n", "");
-        assertEquals(tmp, "Dataframepremiereligne:g[1][2]");
+        assertEquals("Dataframepremiereligne:g[1][2]",tmp);
     }
 
     @Test(timeout = 100)
@@ -918,14 +919,14 @@ public class PandasTest {
         a.add("1");
         d = new Dataframe(a);
         String tmp = d.afficherPremieresLignes().replaceAll(" ", "").replaceAll("\n", "");
-        assertEquals(tmp, "Dataframepremiereligne:g[1]");
+        assertEquals("Dataframepremiereligne:g[1]",tmp);
     }
 
     @Test(timeout = 100)
     public void afficherDernieresLignesVide() {
         d = new Dataframe();
         assertTrue(d.getDataframes().isEmpty());
-        assertEquals(d.afficherDernieresLignes(), "Dataframe derniere ligne:\n");
+        assertEquals("Dataframe derniere ligne:\n",d.afficherDernieresLignes());
     }
 
     @Test(timeout = 100)
@@ -937,7 +938,7 @@ public class PandasTest {
         a.add("3");
         d = new Dataframe(a);
         String tmp = d.afficherDernieresLignes().replaceAll(" ", "").replaceAll("\n", "");
-        assertEquals(tmp, "Dataframederniereligne:g[3]");
+        assertEquals("Dataframederniereligne:g[3]",tmp);
     }
 
 }
